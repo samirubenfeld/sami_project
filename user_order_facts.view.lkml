@@ -6,7 +6,7 @@ view: user_order_facts {
   , COUNT(*) as lifetime_items
   , COUNT(DISTINCT order_items.order_id) as lifetime_orders
   , MIN(DATE(created_at)) AS first_order
-  , MAX(DATE(created_at)) AS first_order
+  , MAX(DATE(created_at)) AS last_order
   , SUM(order_items.sale_price) as lifetime_revenue
   FROM order_items
   LEFT JOIN orders ON order_items.order_id=orders.id
