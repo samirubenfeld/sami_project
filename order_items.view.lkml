@@ -24,6 +24,14 @@ view: order_items {
     type: time
     timeframes: [
       raw,
+      hour,
+      day_of_month,
+      day_of_week,
+      day_of_week_index,
+      fiscal_month_num,
+      fiscal_quarter,
+      fiscal_quarter_of_year,
+      fiscal_year,
       time,
       date,
       week,
