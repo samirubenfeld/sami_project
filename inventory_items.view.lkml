@@ -65,6 +65,15 @@ view: inventory_items {
     sql: ${TABLE}.sold_at IS NOT NULL ;;
   }
 
+  measure: sold_items_distinct {
+    type: count_distinct
+    sql: ${TABLE}.id;;
+    filters: {
+      field: sold_date
+      value: "-NULL"
+    }
+  }
+
   measure: number_on_hand {
     type: count
     filters: {
