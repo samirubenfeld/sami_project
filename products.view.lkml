@@ -42,6 +42,7 @@ view: products {
   measure: total_retail_price {
     type: sum
     sql: ${retail_price} ;;
+    value_format_name: usd
   }
 
   measure: average_retail_price {
