@@ -93,6 +93,12 @@ view: order_items {
     value_format_name: usd
   }
 
+  measure: cumulative_total_revenue {
+    type: running_total
+    sql: ${total_sale_price} ;;
+    value_format_name: usd
+  }
+
   measure: average_sale_price {
     type: average
     sql: ${sale_price} ;;
