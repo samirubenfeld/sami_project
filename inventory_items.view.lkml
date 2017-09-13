@@ -74,6 +74,12 @@ view: inventory_items {
     }
   }
 
+  measure: percent_sold {
+    type: number
+    sql: 100.0 * ${sold_items_distinct} / NULLIF(${count}, 0) ;;
+    value_format: "0.00"
+  }
+
   measure: number_on_hand {
     type: count
     filters: {
