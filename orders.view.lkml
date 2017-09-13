@@ -37,6 +37,11 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  measure: count_distinct {
+    type: count_distinct
+    drill_fields: [user_id]
+  }
+
 
   measure: count {
     type: count
