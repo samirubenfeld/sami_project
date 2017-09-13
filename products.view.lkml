@@ -56,6 +56,17 @@ view: products {
 
   measure: count {
     type: count
-    drill_fields: [id, item_name, inventory_items.count]
+    drill_fields: [
+      id,
+      item_name,
+      retail_price,
+      sku,
+      department,
+      rank,
+      brand,
+      category,
+      inventory_items.count
+    ]
   }
+
 }
