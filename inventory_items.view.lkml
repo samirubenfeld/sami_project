@@ -10,7 +10,9 @@ view: inventory_items {
   dimension: cost {
     type: number
     sql: ${TABLE}.cost ;;
+    value_format_name: usd
   }
+
 
   dimension_group: created {
     type: time
@@ -18,6 +20,9 @@ view: inventory_items {
       raw,
       time,
       date,
+      day_of_month,
+      day_of_week,
+      day_of_year,
       week,
       month,
       quarter,
@@ -49,5 +54,11 @@ view: inventory_items {
   measure: count {
     type: count
     drill_fields: [id, products.item_name, products.id, order_items.count]
+  }
+
+  measure: total_cost {
+    type: sum
+    sql: ${cost} ;;
+    value_format_name: usd
   }
 }
