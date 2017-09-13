@@ -68,6 +68,24 @@ view: inventory_items {
     }
   }
 
+  measure: count_last_28d {
+    type: count
+    hidden: yes
+    filters: {
+      field: created_date
+      value: "28 days"
+    }
+  }
+
+  measure: count_last_90d {
+    type: count
+    hidden: yes
+    filters: {
+      field: created_date
+      value: "90 days"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, products.item_name, products.id, order_items.count]
