@@ -60,6 +60,14 @@ view: inventory_items {
     sql: ${sold_raw} is not null ;;
   }
 
+  measure: number_on_hand {
+    type: count
+    filters: {
+      field: is_sold
+      value: "No"
+    }
+  }
+
   measure: count {
     type: count
     drill_fields: [id, products.item_name, products.id, order_items.count]
