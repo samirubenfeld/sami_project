@@ -47,6 +47,12 @@ view: orders {
     sql: ${id} ;;
   }
 
+  measure: count_growth {
+    type: percent_of_previous
+    sql: ${count} ;;
+  }
+
+
   measure: count_distinct {
     type: count_distinct
     sql: ${user_id} ;;
