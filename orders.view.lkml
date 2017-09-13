@@ -37,10 +37,6 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: count_distinct {
-    type:  count_distinct
-    drill_fields: [id, status, users.last_name, users.first_name, users.id, order_items.count]
-  }
 
   measure: count {
     type: count
