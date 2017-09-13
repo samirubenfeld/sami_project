@@ -1,7 +1,6 @@
 view: user_order_facts {
   derived_table: {
-#   # Or, you could make this view a derived table, like this:
-  sql: |
+  sql:
   SELECT
   orders.user_id as user_id
   , COUNT(*) as lifetime_items
