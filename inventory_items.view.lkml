@@ -55,6 +55,11 @@ view: inventory_items {
     sql: ${TABLE}.sold_at ;;
   }
 
+  dimension: days_in_inventory {
+    type: number
+    sql: DATEDIFF(${sold_date}, ${created_date}) ;;
+  }
+
   dimension: is_sold {
     type: yesno
     sql: ${sold_raw} is not null ;;
