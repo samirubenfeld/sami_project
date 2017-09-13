@@ -43,12 +43,21 @@ view: inventory_items {
       raw,
       time,
       date,
+      day_of_month,
+      day_of_week,
+      day_of_week_index,
+      hour_of_day,
       week,
       month,
       quarter,
       year
     ]
     sql: ${TABLE}.sold_at ;;
+  }
+
+  dimension: is_sold {
+    type: yesno
+    sql: ${sold_raw} is not null ;;
   }
 
   measure: count {
