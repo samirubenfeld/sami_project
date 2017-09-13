@@ -34,6 +34,15 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
+  measure: returned_items {
+  type: count_distinct
+  sql: ${TABLE}.id;;
+  filters: {
+    field: returned_date
+    value: "-NULL"
+  }
+}
+
 
   dimension: sale_price {
     type: number
