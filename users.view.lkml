@@ -23,6 +23,8 @@ view: users {
     sql: ${TABLE}.country ;;
   }
 
+
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -108,5 +110,14 @@ view: users {
       orders.count,
       user_data.count
     ]
+  }
+
+  measure: us_count {
+    type: count   # COUNT(CASE WHEN user.country = ‘US’ THEN 1 ELSE NULL END)
+    drill_fields: [detail*]   # Also, when drilling, adds the filter users.country=’US’
+    filters: {
+      field: users.country
+      value: "US"
+    }
   }
 }
