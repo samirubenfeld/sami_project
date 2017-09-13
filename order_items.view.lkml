@@ -91,7 +91,9 @@ view: order_items {
       id,
       returned_time,
       sale_price,
-      products.name
+      products.name,
+      order_id,
+      inventory_item_id
     ]
   }
 
