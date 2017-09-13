@@ -54,12 +54,13 @@ view: user_order_facts {
     }
 
   dimension: one_to_three_customer {
+    description: "Users who have made between 1 and 3 orders"
     type: yesno
     sql: ${lifetime_orders} >= 1 AND ${lifetime_orders} <= 3;;
   }
 
   dimension: four_plus_customer {
-    label: "Users who have made 4+ orders"
+    description: "Users who have made 4+ orders"
     type: yesno
     sql: ${lifetime_orders} > 4;;
   }
