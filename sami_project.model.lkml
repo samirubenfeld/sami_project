@@ -56,7 +56,13 @@ explore: orders {
   }
 }
 
-explore: products {}
+explore: products {
+  join: inventory_items {
+    type: left_outer
+    sql_on: ${products.id} = ${inventory_items.product_id};;
+    relationship: many_to_one
+  }
+}
 
 
 

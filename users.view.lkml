@@ -27,6 +27,10 @@ view: users {
     type: time
     timeframes: [
       raw,
+      day_of_month,
+      day_of_week,
+      day_of_year,
+      hour_of_day,
       time,
       date,
       week,
@@ -36,6 +40,23 @@ view: users {
     ]
     sql: ${TABLE}.created_at ;;
   }
+
+  dimension: age_tier {
+    type: tier
+    tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80]
+    style: classic # the default value, could be excluded
+    sql: ${age} ;;
+  }
+
+
+  dimension: age_tier_split {
+    type: tier
+    tiers: [0, 26, 49]
+    style: classic # the default value, could be excluded
+    sql: ${age} ;;
+  }
+
+
 
   dimension: email {
     type: string
