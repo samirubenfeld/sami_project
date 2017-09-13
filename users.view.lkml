@@ -17,6 +17,24 @@ view: users {
     sql: ${TABLE}.city ;;
   }
 
+  measure: nyc_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.city
+      value: "New York"
+    }
+  }
+
+  measure: sf_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.city
+      value: "San Francisco"
+    }
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
