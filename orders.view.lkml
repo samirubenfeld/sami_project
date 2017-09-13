@@ -34,6 +34,6 @@ view: orders {
 
   measure: count {
     type: count
-    drill_fields: [id, users.last_name, users.first_name, users.id, order_items.count]
+    drill_fields: [id, status, users.last_name, users.first_name, users.id, order_items.count]
   }
 }
