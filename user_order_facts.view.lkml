@@ -35,4 +35,9 @@ view: user_order_facts {
      type: sum
     sql: ${lifetime_orders} ;;
   }
+
+  measure: count {
+    type: count
+    drill_fields: [user_id, most_recent_purchase_date]
+  }
 }
