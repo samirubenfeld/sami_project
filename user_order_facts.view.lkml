@@ -60,6 +60,11 @@ view: user_order_facts {
     sql: ${lifetime_orders} >= 1 AND ${lifetime_orders} <= 3;;
   }
 
+  dimension: four_plus_customer {
+    type: yesno
+    sql: ${lifetime_orders} > 4;;
+  }
+
   dimension_group: first_order {
     type: time
     timeframes: [date, week, month]
