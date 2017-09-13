@@ -17,6 +17,7 @@ view: user_order_facts {
   dimension: user_id {
     description: "Unique ID for each user that has ordered"
     type: number
+    primary_key: yes
     sql: ${TABLE}.user_id ;;
    }
 
@@ -58,6 +59,7 @@ view: user_order_facts {
   }
 
   dimension: four_plus_customer {
+    label: "Users who have made 4+ orders"
     type: yesno
     sql: ${lifetime_orders} > 4;;
   }
