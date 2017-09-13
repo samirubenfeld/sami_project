@@ -62,7 +62,7 @@ view: inventory_items {
 
   dimension: is_sold {
     type: yesno
-    sql: ${sold_raw} is not null ;;
+    sql: ${TABLE}.sold_at is not null ;;
   }
 
   measure: number_on_hand {
