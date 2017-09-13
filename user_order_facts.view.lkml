@@ -5,10 +5,8 @@ view: user_order_facts {
   orders.user_id as user_id
   , COUNT(*) as lifetime_items
   , COUNT(DISTINCT order_items.order_id) as lifetime_orders
-  , MIN(NULLIF(orders.created_at,0)) as first_order
-  , MAX(NULLIF(orders.created_at,0)) as latest_order
-  , COUNT(DISTINCT DATE_TRUNC('month', NULLIF(orders.created_at,0)))
-  as number_of_distinct_months_with_orders
+  , MIN(DATE(created_at)) AS first_order
+  , MAX(DATE(created_at)) AS first_order
   , SUM(order_items.sale_price) as lifetime_revenue
   FROM order_items
   LEFT JOIN orders ON order_items.order_id=orders.id
