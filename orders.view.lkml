@@ -39,7 +39,7 @@ view: orders {
 
   measure: count_distinct {
     type: count_distinct
-    drill_fields: [user_id]
+    sql: ${user_id} ;;
   }
 
 
