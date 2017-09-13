@@ -43,13 +43,6 @@ view: order_items {
   }
 }
 
-  measure: returned_items {
-    type: count
-    filters: {
-      field: returned_date
-      value: "-NULL"
-    }
-  }
 
 
   dimension: sale_price {
