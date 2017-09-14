@@ -124,10 +124,14 @@ view: users {
     fields: [
       id,
       last_name,
+      orders.id,
       first_name,
       events.count,
       orders.count,
-      user_data.count
+      products.count,
+      user_data.count,
+      users.age,
+      users.zipcode
     ]
   }
 
