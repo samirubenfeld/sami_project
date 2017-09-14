@@ -135,6 +135,8 @@ view: users {
   measure: average_age {
     type: average
     sql: ${TABLE}.age ;;
+    value_format_name: decimal_2
+
   }
 
 #   filter: brand_select { … }
