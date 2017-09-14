@@ -25,8 +25,6 @@ view: order_items {
   }
 
 
-
-
   dimension_group: returned {
     type: time
     timeframes: [
@@ -44,6 +42,7 @@ view: order_items {
       time,
       date,
       week,
+      minute,
       month,
       month_name,
       month_num,
