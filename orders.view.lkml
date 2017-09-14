@@ -46,6 +46,11 @@ view: orders {
     sql: ${status} = 'complete' ;;
   }
 
+  dimension: is_pending {
+    type: yesno
+    sql: ${status} = 'pending' ;;
+  }
+
   dimension: user_id {
     type: number
     # hidden: yes
