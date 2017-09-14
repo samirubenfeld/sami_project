@@ -101,6 +101,12 @@ explore: user_data {
 }
 
 explore: users {
+  always_filter: {
+    filters: {
+      field: users.age
+      value: "25"
+    }
+  }
   join: orders {
     type:  inner
     sql_on: ${users.id} = ${orders.user_id} ;;
