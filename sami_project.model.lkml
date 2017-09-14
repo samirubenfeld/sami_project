@@ -100,4 +100,10 @@ explore: user_data {
   }
 }
 
-explore: users {}
+explore: users {
+  join: orders {
+    type:  inner
+    sql_on: ${users.id} = ${orders.user_id} ;;
+    relationship: one_to_many
+    }
+}
