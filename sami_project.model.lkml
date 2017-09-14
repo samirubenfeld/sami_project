@@ -28,6 +28,7 @@ explore: inventory_items {
 }
 
 explore: order_items {
+
   view_label: "General Order Info"
   join: inventory_items {
     type: left_outer
@@ -67,6 +68,7 @@ explore: order_items {
 }
 
 explore: orders {
+  sql_always_where: ${created_date} >= '2012-01-01' ;;
   join: users {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
