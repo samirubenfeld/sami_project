@@ -72,6 +72,13 @@ view: order_items {
     sql: ${sale_price} - ${inventory_items.cost};;
   }
 
+  measure: average_gross_margin {
+    description: "Average of how much an item sold for minus the cost of that item."
+    type: average
+    value_format_name: usd
+    sql: ${sale_price} - ${inventory_items.cost};;
+  }
+
   dimension: price_range {
     case: {
       when: {
