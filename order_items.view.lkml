@@ -19,6 +19,11 @@ view: order_items {
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+  dimension: was_returned {
+    type: yesno
+    sql: ${TABLE}.returned_at IS NOT NULL ;;
+  }
+
 
   dimension_group: returned {
     type: time
