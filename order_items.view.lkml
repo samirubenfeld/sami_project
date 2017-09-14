@@ -149,6 +149,11 @@ view: order_items {
     value_format_name: usd
   }
 
+  measure: count_growth {
+    type: percent_of_previous
+    sql: ${count} ;;
+  }
+
   dimension: random_value {
     type:  number
     sql: ROUND(RAND()*100, 0) ;;
