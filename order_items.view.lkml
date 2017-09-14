@@ -181,11 +181,6 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-  measure: average_gross_margin_alt {
-    type: average
-    sql: ${gross_margin} ;;
-    value_format_name: decimal_2
-  }
 
   measure: median_sale_price {
     type: median
