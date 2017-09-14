@@ -7,19 +7,34 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+
   dimension_group: created {
     type: time
     timeframes: [
       raw,
+      hour,
+      day_of_month,
+      day_of_week,
+      day_of_week_index,
+      day_of_year,
+      hour_of_day,
+      fiscal_month_num,
+      fiscal_quarter,
+      fiscal_quarter_of_year,
+      fiscal_year,
       time,
       date,
       week,
       month,
+      month_name,
+      month_num,
       quarter,
+      quarter_of_year,
       year
     ]
     sql: ${TABLE}.created_at ;;
   }
+
 
   dimension: status {
     type: string
