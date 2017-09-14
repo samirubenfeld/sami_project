@@ -149,6 +149,11 @@ view: order_items {
     value_format_name: usd
   }
 
+  measure: percent_of_total_profit {
+    type: percent_of_total
+    sql: ${total_profit} ;;
+  }
+
   measure: count_growth {
     type: percent_of_previous
     sql: ${count} ;;
