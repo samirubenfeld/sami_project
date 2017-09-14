@@ -116,4 +116,11 @@ view: inventory_items {
     sql: ${cost} ;;
     value_format_name: usd
   }
+
+  measure: total_profit {
+    type: number
+    sql: ${order_items.total_revenue} - ${total_cost} ;;
+    value_format_name: usd
+  }
+
 }

@@ -113,7 +113,7 @@ view: order_items {
     ]
   }
 
-  measure: total_sale_price {
+  measure: total_revenue {
     type: sum
     sql: ${sale_price} ;;
     value_format_name: usd
@@ -121,7 +121,7 @@ view: order_items {
 
   measure: cumulative_total_revenue {
     type: running_total
-    sql: ${total_sale_price} ;;
+    sql: ${total_revenue} ;;
     value_format_name: usd
   }
 
@@ -141,6 +141,12 @@ view: order_items {
     type: max
     value_format_name: usd
     sql: ${sale_price} ;;
+  }
+
+  measure: total_profit {
+    type: number
+    sql: ${order_items.total_revenue} - ${inventory_items.total_cost} ;;
+    value_format_name: usd
   }
 
   dimension: random_value {
