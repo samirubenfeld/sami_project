@@ -42,20 +42,7 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
-  measure: returned_items_distinct {
-  type: count_distinct
-  sql: ${TABLE}.id;;
-  filters: {
-    field: returned_date
-    value: "-NULL"
-  }
-}
 
-  measure: percent_returned {
-    type: number
-    sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
-    value_format: "0.00"
-  }
 
 
 
@@ -65,7 +52,7 @@ view: order_items {
     value_format_name: usd
   }
 
-  measure: gross_margin {
+  dimension: gross_margin {
     description: "How much an item sold for minus the cost of that item."
     type: number
     value_format_name: usd
@@ -73,12 +60,7 @@ view: order_items {
   }
 
 
-  measure: average_gross_margin {
-    description: "Average of how much an item sold for minus the cost of that item."
-    type: average
-    value_format_name: usd
-    sql: ${sale_price} - ${inventory_items.cost};;
-  }
+
 
   dimension: price_range {
     case: {
@@ -100,6 +82,7 @@ view: order_items {
   }
 
 
+#MEASURES
 
   measure: count {
     type: count
@@ -113,6 +96,20 @@ view: order_items {
     ]
   }
 
+  measure: returned_items_distinct {
+    type: count_distinct
+    sql: ${TABLE}.id;;
+    filters: {
+      field: returned_date
+      value: "-NULL"
+    }
+  }
+
+  measure: percent_returned {
+    type: number
+    sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
+    value_format: "0.00"
+  }
   measure: total_revenue {
     type: sum
     sql: ${sale_price} ;;
@@ -125,10 +122,6 @@ view: order_items {
     value_format_name: usd
   }
 
-  measure: average_sale_price {
-    type: average
-    sql: ${sale_price} ;;
-  }
 
 
   measure: least_expensive_item {
@@ -158,6 +151,107 @@ view: order_items {
     type: percent_of_previous
     sql: ${count} ;;
   }
+
+  measure: average_gross_margin {
+    description: "Average of how much an item sold for minus the cost of that item."
+    type: average
+    value_format_name: usd
+    sql: ${sale_price} - ${inventory_items.cost};;
+  }
+  measure: total_gross_margin {
+    type: sum
+    sql: ${gross_margin} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: total_sale_price {
+    type: sum
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: average_sale_price {
+    type: average
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: average_gross_margin_alt {
+    type: average
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: median_sale_price {
+    type: median
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: median_gross_margin {
+    type: median
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: 5th_percentile_sale_price {
+    type: percentile
+    percentile: 5
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 5th_percentile_gross_margin {
+    type: percentile
+    percentile: 5
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: 25th_percentile_sale_price {
+    type: percentile
+    percentile: 25
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 25th_percentile_gross_margin {
+    type: percentile
+    percentile: 25
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: 75th_percentile_sale_price {
+    type: percentile
+    percentile: 75
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 75th_percentile_gross_margin {
+    type: percentile
+    percentile: 75
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+  measure: 95th_percentile_sale_price {
+    type: percentile
+    percentile: 95
+    sql: ${sale_price} ;;
+    value_format: "$#,##0.00"
+  }
+
+  measure: 95th_percentile_gross_margin {
+    type: percentile
+    percentile: 95
+    sql: ${gross_margin} ;;
+    value_format_name: decimal_2
+  }
+
+
+  #RANDOM
 
   dimension: random_value {
     type:  number
