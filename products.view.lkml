@@ -55,6 +55,11 @@ view: products {
     sql: ${TABLE}.sku ;;
   }
 
+  measure: category_list {
+    type: string
+    sql: GROUP_CONCAT(${category}) ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [
