@@ -84,6 +84,7 @@ view: order_items {
       when: {
         sql: ${sale_price} < 20 ;;
         label: "Inexpensive"
+
       }
       when: {
         sql: ${sale_price} >= 20 AND ${sale_price} < 100 ;;
@@ -139,5 +140,10 @@ view: order_items {
     type: max
     value_format_name: usd
     sql: ${sale_price} ;;
+  }
+
+  dimension: random_value {
+    type:  number
+    sql: ROUND(RAND()*100, 0) ;;
   }
 }
