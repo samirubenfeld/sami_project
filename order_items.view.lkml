@@ -65,6 +65,13 @@ view: order_items {
     value_format_name: usd
   }
 
+  measure: gross_margin {
+    description: "How much an item sold for minus the cost of that item."
+    type: number
+    value_format_name: usd
+    sql: ${sale_price} - ${inventory_items.cost};;
+  }
+
   dimension: price_range {
     case: {
       when: {
