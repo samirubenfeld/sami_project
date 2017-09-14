@@ -135,11 +135,13 @@ view: order_items {
 
   measure: least_expensive_item {
     type: min
+    value_format_name: usd
     sql: ${sale_price} ;;
   }
 
   measure: most_expensive_item {
     type: max
+    value_format_name: usd
     sql: ${sale_price} ;;
   }
 }
