@@ -25,6 +25,8 @@ view: order_items {
   }
 
 
+
+
   dimension_group: returned {
     type: time
     timeframes: [
@@ -47,7 +49,16 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
+  measure: returned_sale_price {
+    type: sum
+    sql: ${TABLE}.sale_price ;;
+    drill_fields: [users.id, users.first_name, users.last_name]
 
+    filters: {
+      field: returned_date
+      value: "-NULL"
+    }
+  }
 
 
 
