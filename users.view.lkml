@@ -131,6 +131,12 @@ view: users {
     ]
   }
 
+
+  measure: average_age {
+    type: average
+    sql: ${TABLE}.age ;;
+  }
+
 #   filter: brand_select { … }
 #
 #   dimension: brand_comparitor {
