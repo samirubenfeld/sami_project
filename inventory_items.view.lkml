@@ -115,7 +115,7 @@ view: inventory_items {
 
   measure: count {
     type: count
-    drill_fields: [id, products.item_name, products.id, order_items.count]
+    drill_fields: [id, products.brand, products.category, products.item_name, products.id, created_date, order_items.count]
   }
 
   measure: total_cost {
