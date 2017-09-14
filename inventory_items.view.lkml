@@ -60,6 +60,13 @@ view: inventory_items {
     sql: DATEDIFF(${sold_date}, ${created_date}) ;;
   }
 
+  dimension: days_in_inventory_tiered {
+    type: tier
+    style: relational
+    tiers: [0,10,20,30,50,100]
+    sql: ${days_in_inventory};;
+  }
+
   dimension: is_sold {
     type: yesno
     sql: ${TABLE}.sold_at IS NOT NULL ;;
