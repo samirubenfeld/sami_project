@@ -181,7 +181,6 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-
   measure: median_sale_price {
     type: median
     sql: ${sale_price} ;;
