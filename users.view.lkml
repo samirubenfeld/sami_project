@@ -131,6 +131,17 @@ view: users {
     ]
   }
 
+#   filter: brand_select { … }
+#
+#   dimension: brand_comparitor {
+#     sql:
+#     CASE
+#       WHEN {% condition brand_select %} ${products.brand_name} {% endcondition %}
+#       THEN ${products.brand_name}
+#       ELSE 'All Other Brands'
+#     END ;;
+#   }
+
   measure: us_count {
     type: count   # COUNT(CASE WHEN user.country = ‘US’ THEN 1 ELSE NULL END)
     drill_fields: [detail*]   # Also, when drilling, adds the filter users.country=’US’
