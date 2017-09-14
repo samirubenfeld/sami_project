@@ -128,10 +128,6 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
-  # measure: total_profit {
-  #   type: number
-  #   sql: ${total_sale_price} - ${products.total_cost} ;;
-  # }
 
   measure: least_expensive_item {
     type: min
