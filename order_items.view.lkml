@@ -133,15 +133,15 @@ view: order_items {
     value_format: "0.00"
   }
 
-  measure: total_revenue {
-    type: sum
-    sql: ${sale_price} ;;
-    value_format_name: usd
-  }
+#   measure: total_revenue {
+#     type: sum
+#     sql: ${sale_price} ;;
+#     value_format_name: usd
+#   }
 
-  measure: cumulative_total_revenue {
+  measure: cumulative_total_sale_price {
     type: running_total
-    sql: ${total_revenue} ;;
+    sql: ${total_sale_price} ;;
     value_format_name: usd
   }
 
@@ -159,15 +159,15 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
-  measure: total_profit {
-    type: number
-    sql: ${order_items.total_revenue} - ${inventory_items.total_cost} ;;
-    value_format_name: usd
-  }
+#   measure: total_profit {
+#     type: number
+#     sql: ${order_items.total_revenue} - ${inventory_items.total_cost} ;;
+#     value_format_name: usd
+#   }
 
   measure: percent_of_total_profit {
     type: percent_of_total
-    sql: ${total_profit} ;;
+    sql: ${total_gross_margin} ;;
   }
 
   measure: count_growth {

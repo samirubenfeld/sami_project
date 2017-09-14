@@ -117,10 +117,10 @@ view: inventory_items {
     value_format_name: usd
   }
 
-  measure: total_profit {
-    type: number
-    sql: ${order_items.total_revenue} - ${inventory_items.total_cost} ;;
-    value_format_name: usd
-  }
+#   measure: total_profit {
+#     type: number
+#     sql: ${order_items.total_sale_price} - ${inventory_items.total_cost} ;;
+#     value_format_name: usd
+#   }
 
 }
