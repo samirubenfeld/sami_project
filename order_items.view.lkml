@@ -115,6 +115,7 @@ view: order_items {
     sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
     value_format: "0.00"
   }
+
   measure: total_revenue {
     type: sum
     sql: ${sale_price} ;;
