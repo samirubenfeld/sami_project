@@ -35,6 +35,8 @@ view: order_items {
       day_of_month,
       day_of_week,
       day_of_week_index,
+      day_of_year,
+      hour_of_day,
       fiscal_month_num,
       fiscal_quarter,
       fiscal_quarter_of_year,
@@ -43,7 +45,10 @@ view: order_items {
       date,
       week,
       month,
+      month_name,
+      month_num,
       quarter,
+      quarter_of_year,
       year
     ]
     sql: ${TABLE}.returned_at ;;
@@ -52,7 +57,7 @@ view: order_items {
   measure: returned_sale_price {
     type: sum
     sql: ${TABLE}.sale_price ;;
-    drill_fields: [users.id, users.first_name, users.last_name]
+    drill_fields: [users.id, products.id, returned_date, users.first_name, users.last_name]
 
     filters: {
       field: returned_date
