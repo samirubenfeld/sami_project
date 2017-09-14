@@ -57,6 +57,7 @@ view: order_items {
   measure: returned_sale_price {
     type: sum
     sql: ${TABLE}.sale_price ;;
+    value_format_name: usd
     drill_fields: [users.id, products.id, returned_date, users.first_name, users.last_name]
 
     filters: {
