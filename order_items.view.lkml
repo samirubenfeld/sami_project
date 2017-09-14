@@ -142,7 +142,7 @@ view: order_items {
   measure: percent_returned {
     type: number
     sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
-    value_format: "0.00"
+    value_format: "#.00\%"
   }
 
 #   measure: total_revenue {
