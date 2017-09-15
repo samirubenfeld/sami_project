@@ -11,7 +11,7 @@ view: user_order_facts {
   , SUM(order_items.sale_price - inventory_items.cost) as lifetime_gross_margin
   FROM order_items
   LEFT JOIN orders ON order_items.order_id=orders.id
-  LEFT JOIN nventory_items ON order_items.inventory_item_id = inventory_items.id
+  LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
   GROUP BY user_id;;
   }
 
