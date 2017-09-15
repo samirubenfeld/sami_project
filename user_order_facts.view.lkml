@@ -6,7 +6,7 @@ view: user_order_facts {
   , COUNT(*) as lifetime_items
   , COUNT(DISTINCT order_items.order_id) as lifetime_orders
   , MIN(DATE(orders.created_at)) AS first_order
-  , MAX(DATE(orders.created_at)) AS last_order
+  , MAX(DATE(orders.created_at)) AS latest_order
   , SUM(order_items.sale_price) as lifetime_revenue
   , SUM(order_items.sale_price - inventory_items.cost) as lifetime_gross_margin
   FROM order_items
