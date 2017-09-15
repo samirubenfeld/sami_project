@@ -78,13 +78,55 @@ view: user_order_facts {
 
   dimension_group: first_order {
     type: time
-    timeframes: [date, week, month]
+    timeframes: [
+      raw,
+      hour,
+      day_of_month,
+      day_of_week,
+      day_of_week_index,
+      day_of_year,
+      hour_of_day,
+      fiscal_month_num,
+      fiscal_quarter,
+      fiscal_quarter_of_year,
+      fiscal_year,
+      time,
+      date,
+      week,
+      month,
+      month_name,
+      month_num,
+      quarter,
+      quarter_of_year,
+      year
+    ]
     sql: ${TABLE}.first_order;;
     }
 
    dimension_group: latest_order {
     type: time
-    timeframes: [date, week, month, year]
+    timeframes: [
+      raw,
+      hour,
+      day_of_month,
+      day_of_week,
+      day_of_week_index,
+      day_of_year,
+      hour_of_day,
+      fiscal_month_num,
+      fiscal_quarter,
+      fiscal_quarter_of_year,
+      fiscal_year,
+      time,
+      date,
+      week,
+      month,
+      month_name,
+      month_num,
+      quarter,
+      quarter_of_year,
+      year
+    ]
     sql: ${TABLE}.latest_order;;
     }
 
