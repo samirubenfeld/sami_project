@@ -90,7 +90,7 @@ view: user_order_facts {
 
   dimension: days_as_customer {
     type: number
-    sql: DATEDIFF(${TABLE}.first_order, ${TABLE}.latest_order)+1;;
+    sql: ABS(DATEDIFF(${TABLE}.first_order, ${TABLE}.latest_order)+1);;
     }
 
   measure: count {
