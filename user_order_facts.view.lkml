@@ -28,7 +28,7 @@ view: user_order_facts {
     dimension: lifetime_items {
     type: number
     sql: COALESCE(${TABLE}.lifetime_items,0);;
-      drill_fields: [users.full_name, products.category, products.item_name, user_id, repeat_customer]
+      drill_fields: [products.category, products.item_name, users.full_name]
     }
 
   dimension: lifetime_orders {
