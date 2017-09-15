@@ -45,11 +45,11 @@ view: orders {
     sql: ${TABLE}.status ;;
     html:
     {% if value == 'pending' %}
-      <div style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ rendered_value }}</div>
+      <div style="color: black; background-color: lightblue; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
     {% elsif value == 'complete' %}
-      <div style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ rendered_value }}</div>
+      <div style="color: black; background-color: lightgreen; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
     {% else %}
-      <div style="color: black; background-color: orange; font-size:100%; text-align:center">{{ rendered_value }}</div>
+      <div style="color: black; background-color: #FFC300; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
     {% endif %}
 ;;
   }
