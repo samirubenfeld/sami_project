@@ -98,6 +98,17 @@ view: users {
     sql: ${TABLE}.last_name ;;
   }
 
+  dimension: city_state {
+    type: string
+    sql: CONCAT(${TABLE}.city, ' ', ${TABLE}.state);;
+    link: {
+      label: "User Dashboard"
+      url: "/dashboards/2?City%20State={{ value }}"
+      icon_url: "http://looker.com/favicon.ico"
+    }
+  }
+
+
 
 
   dimension: full_name {
