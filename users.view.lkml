@@ -109,6 +109,19 @@ view: users {
   }
 
 
+  dimension: full_name_alt {
+    type: string
+    sql: CONCAT(${TABLE}.first_name, ' ', ${TABLE}.last_name);;
+    link: {
+      label: "User Dashboard"
+      url: "/dashboards/[DASHBOARD_ID]?Full%20Name={{ value }}"
+      icon_url: "http://looker.com/favicon.ico"
+    }
+  }
+
+
+
+
   dimension: state {
     type: string
     map_layer_name: us_states
