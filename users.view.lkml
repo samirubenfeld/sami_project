@@ -105,7 +105,7 @@ view: users {
     sql: CONCAT(${TABLE}.first_name, ' ', ${TABLE}.last_name);;
     link: {
       label: "User Dashboard"
-      url: "/dashboards/[DASHBOARD_ID]?Full%20Name={{ value }}"
+      url: "/dashboards/2?Full%20Name={{ value }}"
       icon_url: "http://looker.com/favicon.ico"
     }
   }
