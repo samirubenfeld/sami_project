@@ -14,6 +14,8 @@ view: user_order_facts {
   }
 
 
+
+
   dimension: user_id {
     description: "Unique ID for each user that has ordered"
     type: number
