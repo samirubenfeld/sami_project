@@ -36,9 +36,22 @@ view: orders {
   }
 
 
+  # dimension: status {
+  #   type: string
+  #   sql: ${TABLE}.status ;;
+  # }
+
   dimension: status {
-    type: string
     sql: ${TABLE}.status ;;
+    html:
+    {% if value == 'pending' %}
+      <p style="color: black; background-color: lightblue; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% elsif value == 'complete' %}
+      <p style="color: black; background-color: lightgreen; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% else %}
+      <p style="color: black; background-color: orange; font-size:100%; text-align:center">{{ rendered_value }}</p>
+    {% endif %}
+;;
   }
 
   dimension: is_complete {
