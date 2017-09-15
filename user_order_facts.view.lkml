@@ -44,13 +44,13 @@ view: user_order_facts {
   dimension: lifetime_revenue {
     type: number
     sql: COALESCE(${TABLE}.lifetime_revenue, 0);;
-    value_format_name: usd_0
+    value_format_name: usd
     }
 
   dimension: lifetime_gross_margin {
     type: number
     sql: COALESCE(${TABLE}.lifetime_gross_margin, 0);;
-    value_format_name: usd_0
+    value_format_name: usd
   }
 
   dimension: lifetime_revenue_tiered {
