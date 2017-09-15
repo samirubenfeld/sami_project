@@ -36,10 +36,10 @@ view: orders {
   }
 
 
-  # dimension: status {
-  #   type: string
-  #   sql: ${TABLE}.status ;;
-  # }
+  dimension: status_alt {
+    type: string
+    sql: ${TABLE}.status ;;
+  }
 
 #   dimension: status {
 #     sql: ${TABLE}.status ;;
