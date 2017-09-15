@@ -41,6 +41,20 @@ view: orders {
   #   sql: ${TABLE}.status ;;
   # }
 
+#   dimension: status {
+#     sql: ${TABLE}.status ;;
+#     html:
+#     {% if value == 'pending' %}
+#       <div style="color: black; background-color: lightblue; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
+#     {% elsif value == 'complete' %}
+#       <div style="color: black; background-color: lightgreen; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
+#     {% else %}
+#       <div style="color: black; background-color: #FFC300; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
+#     {% endif %}
+# ;;
+#     drill_fields: [products.brand, product.category, order_items.count]
+#   }
+
   dimension: status {
     sql: ${TABLE}.status ;;
     html:
@@ -52,7 +66,7 @@ view: orders {
       <div style="color: black; background-color: #FFC300; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
     {% endif %}
 ;;
-    drill_fields: [products.brand, product.category, order_items.count]
+    # drill_fields: [products.brand, product.category, order_items.count]
   }
 
   dimension: is_complete {
