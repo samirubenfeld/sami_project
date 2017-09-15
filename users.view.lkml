@@ -98,18 +98,9 @@ view: users {
     sql: ${TABLE}.last_name ;;
   }
 
+
+
   dimension: full_name {
-    type: string
-    sql: ${first_name} || ' ' || ${last_name} ;;
-    link: {
-      label: "User Dashboard"
-      url: "/dashboards/[DASHBOARD_ID]?Full%20Name={{ value }}"
-      icon_url: "http://looker.com/favicon.ico"
-    }
-  }
-
-
-  dimension: full_name_alt {
     type: string
     sql: CONCAT(${TABLE}.first_name, ' ', ${TABLE}.last_name);;
     link: {
