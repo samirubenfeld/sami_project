@@ -86,6 +86,6 @@ view: user_order_facts {
 
   measure: count {
     type: count
-    drill_fields: [user_id, repeat_customer]
+    drill_fields: [users.full_name, user_id, repeat_customer]
   }
 }
