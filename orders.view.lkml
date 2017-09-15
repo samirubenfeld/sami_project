@@ -52,6 +52,7 @@ view: orders {
       <div style="color: black; background-color: #FFC300; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
     {% endif %}
 ;;
+    drill_fields: [products.brand, product.category, order_items.count]
   }
 
   dimension: is_complete {
