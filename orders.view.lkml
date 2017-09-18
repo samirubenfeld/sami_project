@@ -69,6 +69,25 @@ view: orders {
     # drill_fields: [products.brand, product.category, order_items.count]
   }
 
+  measure: cancelled_items_distinct {
+    type: count_distinct
+    sql: ${TABLE}.id;;
+    drill_fields: [
+      id,
+      users.full_name,
+      order_items.returned_date,
+      order_items.sale_price,
+      products.name,
+      products.item_name,
+      order_items.order_id,
+      order_items.inventory_item_id
+    ]
+    filters: {
+      field: status
+      value: "cancelled"
+    }
+  }
+
   dimension: is_complete {
     type: yesno
     sql: ${status} = 'complete' ;;
