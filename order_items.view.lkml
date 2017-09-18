@@ -133,6 +133,14 @@ view: order_items {
   measure: returned_items_distinct {
     type: count_distinct
     sql: ${TABLE}.id;;
+    drill_fields: [
+      id,
+      returned_time,
+      sale_price,
+      products.name,
+      order_id,
+      inventory_item_id
+    ]
     filters: {
       field: returned_date
       value: "-NULL"
