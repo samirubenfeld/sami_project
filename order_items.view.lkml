@@ -57,7 +57,7 @@ view: order_items {
     type: sum
     sql: ${TABLE}.sale_price ;;
     value_format_name: usd
-    drill_fields: [users.id, products.id, returned_date, users.first_name, users.last_name]
+    drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
 
     filters: {
       field: returned_date
