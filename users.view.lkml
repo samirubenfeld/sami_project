@@ -5,6 +5,7 @@ view: users {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+
     link: {
       label: "User Dashboard"
       url: "/dashboards/2?ID={{ _filters['users.id'] | url_encode }}"
