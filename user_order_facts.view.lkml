@@ -25,6 +25,13 @@ view: user_order_facts {
     sql: ${TABLE}.user_id ;;
    }
 
+
+#   dimension: returned_items {
+#     description: "Does this customer have any returned items?"
+#     type: yesno
+#     sql: ${order_items.returned_at} IS NOT NULL ;;
+#   }
+
     dimension: lifetime_items {
     type: number
     sql: COALESCE(${TABLE}.lifetime_items,0);;
