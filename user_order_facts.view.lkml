@@ -12,7 +12,8 @@ view: user_order_facts {
   FROM order_items
   LEFT JOIN orders ON order_items.order_id=orders.id
   LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
-  WHERE order_items.returned_at IS NULL
+  LEFT JOIN products ON inventory_items.product_id = products.id
+  WHERE order_items.returned_at IS NULL AND orders.status != "cancelled"
   GROUP BY user_id;;
   }
 

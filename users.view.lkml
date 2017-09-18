@@ -146,10 +146,22 @@ view: users {
     sql: ${TABLE}.state ;;
   }
 
+  # dimension: zip {
+  #   type: zipcode
+  #   sql: ${TABLE}.zip ;;
+  # }
+
+
+
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+    map_layer_name: my_neighborhood_layer
   }
+
+  # map_layer: my_neighborhood_layer {
+  #   file: "ZIP_CODE_040114.topojson"
+  # }
 
   measure: count {
     type: count

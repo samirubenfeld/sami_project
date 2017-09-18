@@ -6,6 +6,11 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
+map_layer: my_neighborhood_layer {
+  file: "ZIP_CODE_040114.json"
+  # property_key: "neighborhood"
+}
+
 explore: events {
   join: users {
     type: left_outer
@@ -65,6 +70,12 @@ explore: order_items {
     sql_on: ${user_order_facts.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
+
+  join: user_gross_margin_facts {
+    type: left_outer
+    sql_on: ${user_gross_margin_facts.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
 }
 
 # explore: order_items_returned {}
@@ -117,4 +128,6 @@ explore: users {
     sql_on: ${users.id} = ${orders.user_id} ;;
     relationship: one_to_many
     }
+
+
 }
