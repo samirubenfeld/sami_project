@@ -132,6 +132,7 @@ view: users {
   dimension: state {
     type: string
     map_layer_name: us_states
+    drill_fields: [detail*]
     sql: ${TABLE}.state ;;
   }
 
