@@ -144,10 +144,17 @@ view: user_order_facts {
     sql: ABS(DATEDIFF(${TABLE}.first_order, ${TABLE}.latest_order)+1);;
     }
 
-  dimension: days_as_customer_alt {
-    type: number
-    sql: DATEDIFF(day, ${first_order_date}, ${latest_order_date}) ;;
+  dimension: days_as_customer_tiered {
+    type: tier
+    tiers: [0,10,20,30,50,100]
+    style: integer
+    sql: ${days_as_customer};;
   }
+
+#   dimension: days_as_customer_alt {
+#     type: number
+#     sql: DATEDIFF(day, ${first_order_date}, ${latest_order_date}) ;;
+#   }
 
   dimension: days_since_first_purchase {
     type: number
