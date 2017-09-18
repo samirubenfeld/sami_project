@@ -96,6 +96,8 @@ view: order_items {
 
 
 
+
+
   dimension: price_range {
     case: {
       when: {
@@ -135,7 +137,8 @@ view: order_items {
     sql: ${TABLE}.id;;
     drill_fields: [
       id,
-      returned_time,
+      users.full_name,
+      returned_date,
       sale_price,
       products.name,
       order_id,
@@ -146,6 +149,23 @@ view: order_items {
       value: "-NULL"
     }
   }
+
+#   measure: returned_items_count {
+#     type: count
+#     sql: ${TABLE}.id;;
+#     drill_fields: [
+#       id,
+#       returned_time,
+#       sale_price,
+#       products.name,
+#       order_id,
+#       inventory_item_id
+#     ]
+#     filters: {
+#       field: returned_date
+#       value: "-NULL"
+#     }
+#   }
 
   measure: percent_returned {
     type: number
@@ -201,6 +221,17 @@ view: order_items {
     value_format_name: usd
     sql: ${sale_price} - ${inventory_items.cost};;
   }
+
+  measure: total_gross_margin_alt {
+    type: sum
+    sql: ${gross_margin} ;;
+    value_format: "$#,##0.00"
+    filters: {
+      field: returned_date
+      value: "NULL"
+    }
+  }
+
   measure: total_gross_margin {
     type: sum
     sql: ${gross_margin} ;;
