@@ -137,6 +137,17 @@ view: user_order_facts {
     sql: ABS(DATEDIFF(${TABLE}.first_order, ${TABLE}.latest_order)+1);;
     }
 
+  dimension: days_as_customer_alt {
+    type: number
+    sql: DATEDIFF(day, ${first_order_date}, ${latest_order_date}) ;;
+  }
+
+  dimension: days_since_first_purchase {
+    type: number
+    sql: DATEDIFF('days', ${first_order_date}, CURRENT_DATE) ;;
+
+  }
+
   measure: count {
     type: count
     drill_fields: [users.full_name, products.category, products.item_name, user_id, repeat_customer]
