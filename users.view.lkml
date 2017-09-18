@@ -150,9 +150,8 @@ view: users {
   set: detail {
     fields: [
       id,
-      last_name,
       orders.id,
-      first_name,
+      full_name,
       events.count,
       orders.count,
       products.count,
