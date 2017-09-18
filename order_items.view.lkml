@@ -141,6 +141,7 @@ view: order_items {
       returned_date,
       sale_price,
       products.name,
+      products.item_name,
       order_id,
       inventory_item_id
     ]
