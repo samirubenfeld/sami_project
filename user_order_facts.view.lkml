@@ -12,6 +12,7 @@ view: user_order_facts {
   FROM order_items
   LEFT JOIN orders ON order_items.order_id=orders.id
   LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
+  WHERE order_items.returned_at IS NULL
   GROUP BY user_id;;
   }
 
