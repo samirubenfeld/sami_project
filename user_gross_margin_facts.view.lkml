@@ -63,36 +63,36 @@ view: user_gross_margin_facts {
   measure: total_30_day_gm{
     type: sum
     sql: ${30_day_gross_margin} ;;
-    value_format_name: decimal_2
+    value_format: "$#,##0.00"
   }
 
   measure: average_30_day_gm {
     type: average
     sql: ${30_day_gross_margin} ;;
-    value_format_name: decimal_2
+    value_format: "$#,##0.00"
   }
 
   measure: total_90_day_gm {
     type: sum
     sql: ${90_day_gross_margin} ;;
-    value_format_name: decimal_2
+    value_format: "$#,##0.00"
   }
 
   measure: average_90_day_gm {
     type: average
     sql: ${90_day_gross_margin} ;;
-    value_format_name: decimal_2
+    value_format: "$#,##0.00"
   }
 
   measure: total_365_day_gm {
     type: sum
     sql: ${365_day_gross_margin} ;;
-    value_format_name: decimal_2
+    value_format: "$#,##0.00"
   }
 
   measure: average_365_day_gm {
     type: average
     sql: ${365_day_gross_margin} ;;
-    value_format_name: decimal_2
+    value_format: "$#,##0.00"
   }
 }

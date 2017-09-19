@@ -156,7 +156,6 @@ view: users {
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
-    map_layer_name: my_neighborhood_layer
   }
 
   # map_layer: my_neighborhood_layer {
