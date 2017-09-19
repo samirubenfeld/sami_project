@@ -89,7 +89,7 @@ view: order_items {
     value_format_name: usd
   }
 
-  dimension: gross_margin {
+  dimension: gross_profit {
     description: "How much an item sold for minus the cost of that item."
     type: number
     value_format_name: usd
@@ -211,7 +211,7 @@ view: order_items {
 
   measure: percent_of_total_profit {
     type: percent_of_total
-    sql: ${total_gross_margin} ;;
+    sql: ${total_gross_profit} ;;
   }
 
   measure: count_growth {
@@ -219,16 +219,16 @@ view: order_items {
     sql: ${count} ;;
   }
 
-  measure: average_gross_margin {
+  measure: average_gross_profit {
     description: "Average of how much an item sold for minus the cost of that item."
     type: average
     value_format_name: usd
     sql: ${sale_price} - ${inventory_items.cost};;
   }
 
-  measure: total_gross_margin_alt {
+  measure: total_gross_profit_alt {
     type: sum
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format: "$#,##0.00"
     filters: {
       field: returned_date
@@ -236,9 +236,9 @@ view: order_items {
     }
   }
 
-  measure: total_gross_margin {
+  measure: total_gross_profit {
     type: sum
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format: "$#,##0.00"
   }
 
@@ -260,9 +260,9 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-  measure: median_gross_margin {
+  measure: median_gross_profit {
     type: median
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format_name: decimal_2
   }
 
@@ -273,10 +273,10 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-  measure: 5th_percentile_gross_margin {
+  measure: 5th_percentile_gross_profit {
     type: percentile
     percentile: 5
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format_name: decimal_2
   }
 
@@ -287,10 +287,10 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-  measure: 25th_percentile_gross_margin {
+  measure: 25th_percentile_gross_profit {
     type: percentile
     percentile: 25
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format_name: decimal_2
   }
 
@@ -301,10 +301,10 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-  measure: 75th_percentile_gross_margin {
+  measure: 75th_percentile_gross_profit {
     type: percentile
     percentile: 75
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format_name: decimal_2
   }
 
@@ -315,10 +315,10 @@ view: order_items {
     value_format: "$#,##0.00"
   }
 
-  measure: 95th_percentile_gross_margin {
+  measure: 95th_percentile_gross_profit {
     type: percentile
     percentile: 95
-    sql: ${gross_margin} ;;
+    sql: ${gross_profit} ;;
     value_format_name: decimal_2
   }
 

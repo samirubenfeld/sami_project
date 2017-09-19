@@ -71,9 +71,9 @@ explore: order_items {
     relationship: many_to_one
   }
 
-  join: user_gross_margin_facts {
+  join: user_gross_profit_facts {
     type: left_outer
-    sql_on: ${user_gross_margin_facts.user_id} = ${users.id} ;;
+    sql_on: ${user_gross_profit_facts.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
 }
