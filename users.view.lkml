@@ -130,6 +130,11 @@ view: users {
       url: "/dashboards/2?Full%20Name={{ value }}"
       icon_url: "http://looker.com/favicon.ico"
     }
+    link: {
+      label: "Send Email"
+      url: "mailto:{{email}}"
+      icon_url: "https://lh6.ggpht.com/8-N_qLXgV-eNDQINqTR-Pzu5Y8DuH0Xjz53zoWq_IcBNpcxDL_gK4uS_MvXH00yN6nd4=w300"
+    }
     # link: {
     #   label: "User Dash Alt"
     #   url: "/dashboards/2?Full%20Name={{ _filters['users.full_name'] | url_encode }}&Users%20ID={{ _filters['users.id'] | url_encode }}"
