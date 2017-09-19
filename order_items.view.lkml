@@ -87,6 +87,7 @@ view: order_items {
     type: number
     sql: ${TABLE}.sale_price ;;
     value_format_name: usd
+
   }
 
   dimension: gross_profit {
@@ -240,12 +241,22 @@ view: order_items {
     type: sum
     sql: ${gross_profit} ;;
     value_format: "$#,##0.00"
+    drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
+    filters: {
+      field: returned_date
+      value: "NULL"
+    }
   }
 
   measure: total_sale_price {
     type: sum
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
+    drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
+    filters: {
+      field: returned_date
+      value: "NULL"
+    }
   }
 
   measure: average_sale_price {
