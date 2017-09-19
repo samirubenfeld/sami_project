@@ -8,7 +8,7 @@ view: user_order_facts {
   , MIN(DATE(orders.created_at)) AS first_order
   , MAX(DATE(orders.created_at)) AS latest_order
   , SUM(order_items.sale_price) as lifetime_revenue
-  , SUM(order_items.sale_price - inventory_items.cost) as lifetime_gross_margin
+  , SUM(order_items.sale_price - inventory_items.cost) as lifetime_gross_profit
   FROM order_items
   LEFT JOIN orders ON order_items.order_id=orders.id
   LEFT JOIN inventory_items ON order_items.inventory_item_id = inventory_items.id
@@ -58,9 +58,9 @@ view: user_order_facts {
     value_format_name: usd
     }
 
-  dimension: lifetime_gross_margin {
+  dimension: lifetime_gross_profit{
     type: number
-    sql: COALESCE(${TABLE}.lifetime_gross_margin, 0);;
+    sql: COALESCE(${TABLE}.lifetime_gross_profit, 0);;
     value_format_name: usd
   }
 
