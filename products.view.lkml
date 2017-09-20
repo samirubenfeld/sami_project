@@ -32,6 +32,30 @@ view: products {
     sql: ${TABLE}.rank ;;
   }
 
+   filter: brand_select {
+  suggest_dimension: brand
+  }
+
+  dimension: brand_comparitor {
+    sql:
+      CASE WHEN {% condition brand_select %} ${brand} {% endcondition %}
+      THEN ${brand}
+      ELSE 'Rest Of Population'
+      END;;
+      }
+
+  filter: category_select {
+    suggest_dimension: category
+  }
+
+  dimension: category_comparitor {
+    sql:
+      CASE WHEN {% condition category_select %} ${category} {% endcondition %}
+      THEN ${category}
+      ELSE 'Rest Of Population'
+      END;;
+  }
+
 
   dimension: retail_price {
     type: number
@@ -59,6 +83,11 @@ view: products {
   measure: category_list {
     type: string
     sql: GROUP_CONCAT(${category}) ;;
+  }
+
+  measure: brand_list {
+    type: string
+    sql: GROUP_CONCAT(${brand}) ;;
   }
 
   measure: count {

@@ -141,6 +141,18 @@ view: users {
     # }
   }
 
+  filter: state_select {
+    suggest_dimension: state
+  }
+
+  dimension: state_comparitor {
+    sql:
+      CASE WHEN {% condition state_select %} ${state} {% endcondition %}
+      THEN ${state}
+      ELSE 'Rest Of Population'
+      END;;
+  }
+
 
 
 
@@ -151,10 +163,7 @@ view: users {
     sql: ${TABLE}.state ;;
   }
 
-  # dimension: zip {
-  #   type: zipcode
-  #   sql: ${TABLE}.zip ;;
-  # }
+
 
 
 

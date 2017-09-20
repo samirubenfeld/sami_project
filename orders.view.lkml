@@ -98,6 +98,8 @@ view: orders {
     sql: ${status} = 'pending' ;;
   }
 
+
+
   dimension: user_id {
     type: number
     # hidden: yes
