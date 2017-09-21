@@ -6,10 +6,7 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-map_layer: my_neighborhood_layer {
-  file: "ZIP_CODE_040114.json"
-  # property_key: "neighborhood"
-}
+
 
 
 

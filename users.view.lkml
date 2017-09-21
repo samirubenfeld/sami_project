@@ -20,6 +20,7 @@ view: users {
 
   dimension: city {
     type: string
+    map_layer_name: us_states
     sql: ${TABLE}.city ;;
   }
 
@@ -126,7 +127,6 @@ view: users {
 
 
 
-
   dimension: full_name {
     type: string
     sql: CONCAT(${TABLE}.first_name, ' ', ${TABLE}.last_name);;
@@ -160,7 +160,6 @@ view: users {
 
 
 
-
   dimension: state {
     type: string
     map_layer_name: us_states
@@ -169,17 +168,11 @@ view: users {
   }
 
 
-
-
-
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
   }
 
-  # map_layer: my_neighborhood_layer {
-  #   file: "ZIP_CODE_040114.topojson"
-  # }
 
   measure: count {
     type: count
