@@ -30,6 +30,11 @@ view: users {
       field: users.city
       value: "New York"
     }
+    link: {
+      label: "Regional Dash: New York City"
+      url: "/dashboards/4?City={{ _filters['users.city'] | url_encode }}"
+      icon_url: "http://looker.com/favicon.ico"
+    }
   }
 
   measure: sf_count {

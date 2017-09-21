@@ -13,8 +13,6 @@ map_layer: my_neighborhood_layer {
 
 
 
-
-
 explore: events {
   join: users {
     type: left_outer
