@@ -41,19 +41,6 @@ view: orders {
     sql: ${TABLE}.status ;;
   }
 
-#   dimension: status {
-#     sql: ${TABLE}.status ;;
-#     html:
-#     {% if value == 'pending' %}
-#       <div style="color: black; background-color: lightblue; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
-#     {% elsif value == 'complete' %}
-#       <div style="color: black; background-color: lightgreen; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
-#     {% else %}
-#       <div style="color: black; background-color: #FFC300; border: 2px; font-weight: bold; font-size:100%; text-align:center">{{ rendered_value }}</div>
-#     {% endif %}
-# ;;
-#     drill_fields: [products.brand, product.category, order_items.count]
-#   }
 
   dimension: status {
     sql: ${TABLE}.status ;;
@@ -98,6 +85,10 @@ view: orders {
     sql: ${status} = 'pending' ;;
   }
 
+  dimension: is_cancelled {
+    type: yesno
+    sql: ${status} = 'cancelled' ;;
+  }
 
 
   dimension: user_id {
@@ -121,6 +112,11 @@ view: orders {
     sql: ${count} ;;
   }
 
+  measure: count_running_total {
+    type: running_total
+    sql: ${count} ;;
+  }
+
 
   measure: count_distinct {
     type: count_distinct
@@ -132,4 +128,23 @@ view: orders {
     type: count
     drill_fields: [id, status, order_items.sale_price, products.brand, product.category, users.full_name, users.id]
   }
+
+
+  # # TEMPLATED FILTER IN A DIMENSION
+
+  # filter: timeframe {
+  #   suggestions: ["Daily", "Weekly", "Monthly", "Yearly"]
+  # }
+
+  # dimension: variable_timeframe {
+  #   sql: CASE
+  #       WHEN {% condition timeframe %} 'Daily' {% endcondition %} THEN TO_CHAR(${created_date},'YYYY-MM-DD')
+  #       WHEN {% condition timeframe %} 'Weekly' {% endcondition %} THEN ${created_week}
+  #       WHEN {% condition timeframe %} 'Monthly' {% endcondition %} THEN ${created_month}
+  #       WHEN {% condition timeframe %} 'Yearly' {% endcondition %} THEN TO_CHAR(${created_year}, '9999')
+  #     END
+  #     ;;
+  # }
+
+
 }

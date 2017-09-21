@@ -11,6 +11,10 @@ map_layer: my_neighborhood_layer {
   # property_key: "neighborhood"
 }
 
+
+
+
+
 explore: events {
   join: users {
     type: left_outer
@@ -128,6 +132,8 @@ explore: users {
     sql_on: ${users.id} = ${orders.user_id} ;;
     relationship: one_to_many
     }
+
+
 
 
 }
