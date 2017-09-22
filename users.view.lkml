@@ -214,6 +214,22 @@ view: users {
 
   }
 
+  measure: men_count {
+    type: count
+    filters: {
+      field: gender
+      value: "Male"
+    }
+  }
+
+  measure: female_count {
+    type: count
+    filters: {
+      field: gender
+      value: "Female"
+    }
+  }
+
 
 
   measure: us_count {
