@@ -1,28 +1,55 @@
 view: order_purchase_affinity {
   derived_table: {
     indexes: ["product_a"]
-    sql: SELECT product_a
-      , product_b
-      , joint_order_count       -- number of times both items are purchased together
-      , top1.product_order_count as product_a_order_count   -- total number of orders with product A in them
-      , top2.product_order_count as product_b_order_count   -- total number of orders with product B in them
-      FROM (
-        SELECT op1.product as product_a
-        , op2.product as product_b
-        , count(*) as joint_order_count
-        FROM ${order_product.SQL_TABLE_NAME} as op1
-        JOIN ${order_product.SQL_TABLE_NAME} op2
+    sql:
+        SELECT product_a
+        , product_b
+        , joint_frequency
+        , top1.product_frequency as product_a_frequency
+        , top2.product_frequency as product_b_frequency
+        FROM (
+          SELECT op1.product as product_a
+          , op2.product as product_b
+          , count(*) as joint_frequency
+        FROM (
+          SELECT o.id as order_id
+        , oi.inventory_item_id as inventory_item_id
+        , p.item_name as product
+        FROM order_items oi
+        JOIN orders o ON o.id = oi.order_id
+        JOIN inventory_items ii ON oi.inventory_item_id = ii.id
+        JOIN products p ON ii.product_id = p.id
+        GROUP BY order_id, item_name) as op1
+          JOIN (
+          SELECT o.id as order_id
+        , oi.inventory_item_id as inventory_item_id
+        , p.item_name as product
+        FROM order_items oi
+        JOIN orders o ON o.id = oi.order_id
+        JOIN inventory_items ii ON oi.inventory_item_id = ii.id
+        JOIN products p ON ii.product_id = p.id
+        GROUP BY order_id, item_name) as op2
         ON op1.order_id = op2.order_id
-        AND op1.order_item_id <> op2.order_item_id            -- ensures we don't match on the same order items in the same order, which would corrupt our frequency metrics on this self-join
-        WHERE {% condition affinity_timeframe %} op1.created_at {% endcondition %}
-        AND {% condition affinity_timeframe %} op2.created_at {% endcondition %}
-        GROUP BY product_a, product_b
-      ) as prop
-      JOIN ${total_order_product.SQL_TABLE_NAME} as top1 ON prop.product_a = top1.product
-      JOIN ${total_order_product.SQL_TABLE_NAME} as top2 ON prop.product_b = top2.product
-      ORDER BY product_a, joint_order_count DESC, product_b
-      ;;
+          GROUP BY product_a, product_b
+        ) as prop
+        JOIN (
+        SELECT p.item_name as product, count(distinct p.item_name, o.id) as product_frequency
+        FROM order_items oi
+        JOIN orders o ON o.id = oi.order_id
+        JOIN inventory_items ii ON oi.inventory_item_id = ii.id
+        JOIN products p ON ii.product_id = p.id
+        GROUP BY p.item_name) as top1
+        ON prop.product_a = top1.product
+        JOIN (
+      SELECT p.item_name as product, count(distinct p.item_name, o.id) as product_frequency
+      FROM order_items oi
+      JOIN orders o ON o.id = oi.order_id
+      JOIN inventory_items ii ON oi.inventory_item_id = ii.id
+      JOIN products p ON ii.product_id = p.id
+      GROUP BY p.item_name) as top2 ON prop.product_b = top2.product
+        ORDER BY product_a, joint_frequency DESC, product_b;;
   }
+
 
   filter: affinity_timeframe {
     type: date
@@ -36,6 +63,18 @@ view: order_purchase_affinity {
   dimension: product_b {
     type: string
     sql: ${TABLE}.product_b ;;
+  }
+
+  filter: product_a_select {
+    suggest_dimension: product_a
+  }
+
+  dimension: product_a_comparitor {
+    sql:
+      CASE WHEN {% condition product_a_select %} ${product_a} {% endcondition %}
+      THEN ${product_a}
+      ELSE 'Rest Of Population'
+      END;;
   }
 
   dimension: joint_order_count {
@@ -112,4 +151,5 @@ view: order_purchase_affinity {
     type: sum
     sql: ${joint_order_count} ;;
   }
+
 }
