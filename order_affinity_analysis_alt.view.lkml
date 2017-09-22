@@ -79,6 +79,22 @@ view: order_affinity_analysis_alt {
     sql: ${TABLE}.product_b_frequency ;;
   }
 
+
+  measure: max_joint_frequency {
+    type: max
+    sql: ${TABLE}.joint_frequency ;;
+  }
+
+  measure: min_joint_frequency {
+    type: min
+    sql: ${TABLE}.joint_frequency ;;
+  }
+
+  measure: average_joint_frequency {
+    type: average
+    sql: ${TABLE}.joint_frequency ;;
+  }
+
   set: detail {
     fields: [product_a, product_b, joint_frequency, product_a_frequency, product_b_frequency]
   }

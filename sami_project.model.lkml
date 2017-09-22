@@ -102,13 +102,11 @@ explore: products {
 }
 
 explore: order_affinity_analysis_alt {
-
+  join: total_orders {
+    type: cross
+    relationship: many_to_one
+  }
 }
-
-#
-# explore: user_order_facts {
-#
-# }
 
 explore: order_purchase_affinity {
   always_filter: {
@@ -117,12 +115,12 @@ explore: order_purchase_affinity {
       value: "last 90 days"
     }
   }
+
   join: total_orders {
     type: cross
     relationship: many_to_one
   }
 }
-
 
 
 explore: user_data {

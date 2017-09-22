@@ -1,9 +1,7 @@
 view: total_orders {
   derived_table: {
     sql: SELECT count(*) as count
-      FROM orders
-      WHERE {% condition order_purchase_affinity.affinity_timeframe %} created_at {% endcondition %}
-      ;;
+      FROM orders;;
   }
 
   dimension: count {

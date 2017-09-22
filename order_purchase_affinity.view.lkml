@@ -65,18 +65,6 @@ view: order_purchase_affinity {
     sql: ${TABLE}.product_b ;;
   }
 
-  filter: product_a_select {
-    suggest_dimension: product_a
-  }
-
-  dimension: product_a_comparitor {
-    sql:
-      CASE WHEN {% condition product_a_select %} ${product_a} {% endcondition %}
-      THEN ${product_a}
-      ELSE 'Rest Of Population'
-      END;;
-  }
-
   dimension: joint_order_count {
     description: "How many times item A and B were purchased in the same order"
     type: number
