@@ -167,6 +167,18 @@ view: users {
     sql: ${TABLE}.state ;;
   }
 
+  filter: full_name_select {
+    suggest_dimension: full_name
+  }
+
+  dimension: full_name_comparitor {
+    sql:
+      CASE WHEN {% condition full_name_select %} ${full_name} {% endcondition %}
+      THEN ${full_name}
+      ELSE 'Rest Of Population'
+      END;;
+  }
+
 
   dimension: zip {
     type: zipcode
@@ -202,16 +214,7 @@ view: users {
 
   }
 
-#   filter: brand_select { … }
-#
-#   dimension: brand_comparitor {
-#     sql:
-#     CASE
-#       WHEN {% condition brand_select %} ${products.brand_name} {% endcondition %}
-#       THEN ${products.brand_name}
-#       ELSE 'All Other Brands'
-#     END ;;
-#   }
+
 
   measure: us_count {
     type: count   # COUNT(CASE WHEN user.country = ‘US’ THEN 1 ELSE NULL END)

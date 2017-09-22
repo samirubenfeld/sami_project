@@ -201,6 +201,13 @@ view: inventory_items {
     value_format_name: usd
   }
 
+
+  measure: average_total_cost {
+    type: average
+    sql:  ${cost} ;;
+    value_format_name:  usd
+  }
+
 #   measure: total_profit {
 #     type: number
 #     sql: ${order_items.total_sale_price} - ${inventory_items.total_cost} ;;
