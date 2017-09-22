@@ -105,19 +105,19 @@ explore: user_order_facts {
 
 }
 
-# explore: order_purchase_affinity {
-#   always_filter: {
-#     filters: {
-#       field: affinity_timeframe
-#       value: "last 90 days"
-#     }
-#   }
+explore: order_purchase_affinity {
+  always_filter: {
+    filters: {
+      field: affinity_timeframe
+      value: "last 90 days"
+    }
+  }
 
-#   join: total_orders {
-#     type: cross
-#     relationship: many_to_one
-#   }
-# }
+  join: total_orders {
+    type: cross
+    relationship: many_to_one
+  }
+}
 
 
 

@@ -118,6 +118,7 @@ view: orders {
   }
 
 
+
   measure: count_distinct {
     type: count_distinct
     sql: ${user_id} ;;
