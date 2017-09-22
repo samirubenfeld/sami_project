@@ -202,7 +202,7 @@ view: inventory_items {
   }
 
 
-  measure: average_total_cost {
+  measure: average_cost {
     type: average
     sql:  ${cost} ;;
     value_format_name:  usd
