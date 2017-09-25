@@ -7,6 +7,7 @@ view: user_order_facts {
   , COUNT(DISTINCT order_items.order_id) as lifetime_orders
   , MIN(DATE(orders.created_at)) AS first_order
   , MAX(DATE(orders.created_at)) AS latest_order
+  , SUM(inventory_items.cost) AS lifetime_cost
   , SUM(order_items.sale_price) as lifetime_revenue
   , SUM(order_items.sale_price - inventory_items.cost) as lifetime_gross_profit
   FROM order_items
@@ -57,6 +58,12 @@ view: user_order_facts {
     sql: COALESCE(${TABLE}.lifetime_revenue, 0);;
     value_format_name: usd
     }
+
+  dimension: lifetime_cost {
+    type: number
+    sql: COALESCE(${TABLE}.lifetime_cost, 0);;
+    value_format_name: usd
+  }
 
   dimension: lifetime_gross_profit{
     type: number
