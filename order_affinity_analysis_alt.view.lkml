@@ -10,7 +10,8 @@ view: order_affinity_analysis_alt {
           , op2.product as product_b
           , count(*) as joint_frequency
         FROM (
-          SELECT o.id as order_id
+          SELECT o.id as order_id,
+          oi.sale_price as sale_price
         , oi.inventory_item_id as inventory_item_id
         , p.item_name as product
         FROM order_items oi
@@ -19,7 +20,8 @@ view: order_affinity_analysis_alt {
         JOIN products p ON ii.product_id = p.id
         GROUP BY order_id, item_name) as op1
           JOIN (
-          SELECT o.id as order_id
+          SELECT o.id as order_id,
+          oi.sale_price as sale_price
         , oi.inventory_item_id as inventory_item_id
         , p.item_name as product
         FROM order_items oi
@@ -63,6 +65,17 @@ view: order_affinity_analysis_alt {
     type: string
     sql: ${TABLE}.product_b ;;
   }
+
+  measure: count_product_a {
+    type: sum
+    sql: ${TABLE}.product_a ;;
+  }
+
+  measure: count_product_b {
+    type: sum
+    sql: ${TABLE}.product_b ;;
+  }
+
 
   dimension: joint_frequency {
     type: string

@@ -1,13 +1,9 @@
 view: total_orders {
   derived_table: {
-    sql: SELECT count(*) as count,
-    count(DISTINCT orders.id) as distinct_orders
-      FROM orders;;
-  }
-
-  dimension: distinct_orders {
-    type: number
-    sql: ${TABLE}.distinct_orders ;;
+    sql: SELECT count(*) as count
+    FROM orders
+    WHERE {% condition order_purchase_affinity.affinity_timeframe %} created_at {% endcondition %}
+    ;;
   }
 
 
@@ -17,12 +13,5 @@ view: total_orders {
     view_label: "Order Purchase Affinity"
     label: "Total Order Count"
   }
-
-  measure: distinct_orders_count {
-    type: sum
-    sql: ${TABLE}.distinct_orders ;;
-  }
-
-
 
 }
