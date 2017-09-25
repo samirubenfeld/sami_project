@@ -173,6 +173,6 @@ view: user_order_facts {
 
   measure: count {
     type: count
-    drill_fields: [users.full_name, products.category, products.item_name, user_id, repeat_customer]
+    drill_fields: [users.full_name, products.category, lifetime_cost, lifetime_gross_profit, lifetime_revenue, products.item_name, user_id, repeat_customer]
   }
 }
