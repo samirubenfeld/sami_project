@@ -115,6 +115,7 @@ view: orders {
   measure: count_running_total {
     type: running_total
     sql: ${count} ;;
+    value_format: "0.000,\" K\""
   }
 
 

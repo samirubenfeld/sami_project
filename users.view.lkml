@@ -24,6 +24,12 @@ view: users {
     sql: ${TABLE}.city ;;
   }
 
+  dimension: california_zips {
+    type: zipcode
+    sql: ${TABLE}.zip ;;
+    map_layer_name: my_california_layer
+  }
+
   measure: nyc_count {
     type: count
     drill_fields: [detail*]
@@ -44,6 +50,25 @@ view: users {
     filters: {
       field: users.city
       value: "San Francisco"
+    }
+  }
+
+  measure: california_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.state
+      value: "California"
+    }
+  }
+
+
+  measure: texas_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.state
+      value: "Texas"
     }
   }
 

@@ -167,7 +167,8 @@ view: user_order_facts {
 
   dimension: days_since_first_purchase {
     type: number
-    sql: DATEDIFF('days', ${first_order_date}, CURRENT_DATE) ;;
+    sql:DATEDIFF(${first_order_date}, CURRENT_DATE) ;;
+    # sql: DATEDIFF('days', ${first_order_date}, CURRENT_DATE) ;;
 
   }
 

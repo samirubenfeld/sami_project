@@ -49,6 +49,12 @@ view: inventory_items {
       hour_of_day,
       week,
       month,
+      month_name,
+      month_num,
+      fiscal_month_num,
+      fiscal_quarter,
+      fiscal_quarter_of_year,
+      fiscal_year,
       quarter,
       year
     ]

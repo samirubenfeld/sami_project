@@ -67,6 +67,20 @@ view: order_items {
     }
   }
 
+  measure: lost_revenue {
+    type: sum
+    sql: ${TABLE}.sale_price * -1;;
+    value_format_name: usd
+    drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
+
+    filters: {
+      field: returned_date
+      value: "-NULL"
+    }
+  }
+
+
+
   measure: returned_sale_price_distinct {
     type: sum_distinct
     sql: ${TABLE}.sale_price ;;
@@ -177,6 +191,16 @@ view: order_items {
     sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
     value_format: "#.00\%"
   }
+
+   measure: returned_percent_gauge {
+    type: number
+    sql: ${percent_returned};;
+    value_format: "#.0\%"
+    html:
+      <img src="https://chart.googleapis.com/chart?chs=500x275&cht=gom&chxt=y&chco=635189,B1A8C4,1EA8DF,8ED3EF&chf=bg,s,FFFFFF00&chl={{ rendered_value }}&chd=t:{{ value }}">;;
+      }
+
+
 
 #   measure: total_revenue {
 #     type: sum

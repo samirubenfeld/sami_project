@@ -1,5 +1,6 @@
 connection: "the_look"
 
+
 # include all the views
 include: "*.view"
 
@@ -7,6 +8,16 @@ include: "*.view"
 include: "*.dashboard"
 
 
+map_layer: my_neighborhood_layer {
+  url: "https://www.dropbox.com/s/v8rs0zarjmdy99o/cb_2014_48_tract_500k.json?dl=0"
+  property_key: "neighborhood"
+}
+
+
+
+map_layer: my_california_layer {
+  url: "https://www.dropbox.com/s/bdt59bats1ngyku/tl_2010_06_zcta510.json?dl=0"
+}
 
 
 
@@ -32,8 +43,8 @@ explore: inventory_items {
 }
 
 explore: order_items {
-
-  view_label: "General Order Info"
+  label: "Order Items 📈"
+ view_label: "General Order Info "
   join: inventory_items {
     type: left_outer
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
