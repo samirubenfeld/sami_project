@@ -99,18 +99,18 @@ explore: orders {
   }
 }
 
-explore: products {
-  join: inventory_items {
-    type: left_outer
-    sql_on: ${products.id} = ${inventory_items.product_id};;
-    relationship: many_to_one
-  }
-  join: order_items {
-    type: left_outer
-    sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
-    relationship: many_to_one
-  }
-}
+# explore: products {
+#   join: inventory_items {
+#     type: left_outer
+#     sql_on: ${products.id} = ${inventory_items.product_id};;
+#     relationship: many_to_one
+#   }
+#   join: order_items {
+#     type: left_outer
+#     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
+#     relationship: many_to_one
+#   }
+# }
 
 explore: order_affinity_analysis_alt {
   join: total_orders {
@@ -134,13 +134,13 @@ explore: order_purchase_affinity {
 }
 
 
-explore: user_data {
-  join: users {
-    type: left_outer
-    sql_on: ${user_data.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+# explore: user_data {
+#   join: users {
+#     type: left_outer
+#     sql_on: ${user_data.user_id} = ${users.id} ;;
+#     relationship: many_to_one
+#   }
+# }
 
 explore: users {
   always_filter: {
