@@ -7,6 +7,21 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
+  filter: timeframe_picker {
+    type: string
+    suggestions: ["Date", "Week", "Month"]
+  }
+
+  dimension: dynamic_timeframe {
+    type: string
+    sql:
+    CASE
+    WHEN {% condition timeframe_picker %} 'Date' {% endcondition %} THEN ${orders.created_date}
+    WHEN {% condition timeframe_picker %} 'Week' {% endcondition %} THEN ${orders.created_week}
+    WHEN {% condition timeframe_picker %} 'Month' {% endcondition %} THEN ${orders.created_month}
+    END ;;
+  }
+
 
   dimension_group: created {
     type: time

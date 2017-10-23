@@ -53,6 +53,8 @@ view: users {
     }
   }
 
+
+
   measure: california_count {
     type: count
     drill_fields: [detail*]
@@ -69,6 +71,45 @@ view: users {
     filters: {
       field: users.state
       value: "Texas"
+    }
+  }
+
+  ##REGIONAL COUNTS
+
+
+  measure: Northeast_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.state
+      value: "Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island, Vermont, New Jersey, New York, Pennsylvania"
+    }
+  }
+
+  measure: Midwest_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.state
+      value: "Illinois, Indiana, Michigan, Ohio, Wisconsin, Iowa, Kansas, Minnesota, Missouri, Nebraska, North Dakota, South Dakota"
+    }
+  }
+
+  measure: South_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.state
+      value: "Delaware, Florida, Georgia, Maryland, North Carolina, South Carolina, Virginia, District of Columbia, West Virginia, Alabama, Kentucky, Mississippi, Tennessee, Arkansas, Louisiana, Oklahoma, Texas"
+    }
+  }
+
+  measure: West_count {
+    type: count
+    drill_fields: [detail*]
+    filters: {
+      field: users.state
+      value: "Arizona, Colorado, Idaho, Montana, Nevada, New Mexico, Utah, Wyoming, Alaska, California, Hawaii, Oregon, Washington"
     }
   }
 
@@ -179,6 +220,19 @@ view: users {
     sql:
       CASE WHEN {% condition state_select %} ${state} {% endcondition %}
       THEN ${state}
+      ELSE 'Rest Of Population'
+      END;;
+  }
+
+
+  filter: city_select {
+    suggest_dimension: state
+  }
+
+  dimension: city_comparitor {
+    sql:
+      CASE WHEN {% condition city_select %} ${city} {% endcondition %}
+      THEN ${city}
       ELSE 'Rest Of Population'
       END;;
   }

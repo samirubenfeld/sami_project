@@ -3,9 +3,13 @@ connection: "the_look"
 
 # include all the views
 include: "*.view"
+include: "bq.*.view"
+# include: "bq.explore.lkml"
 
 # include all the dashboards
 include: "*.dashboard"
+# include: "/test_datablocks/bq.*.view.lkml"
+# include: "/test_datablocks/bq.explore.lkml"
 
 
 map_layer: my_neighborhood_layer {
@@ -22,6 +26,7 @@ map_layer: my_california_layer {
 
 
 explore: events {
+  hidden: yes
   join: users {
     type: left_outer
     sql_on: ${events.user_id} = ${users.id} ;;
@@ -86,11 +91,13 @@ explore: order_items {
     sql_on: ${user_gross_profit_facts.user_id} = ${users.id} ;;
     relationship: many_to_one
   }
+
 }
 
 # explore: order_items_returned {}
 
 explore: orders {
+  hidden: yes
   sql_always_where: ${created_date} >= '2012-01-01' ;;
   join: users {
     type: left_outer
