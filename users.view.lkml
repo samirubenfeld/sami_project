@@ -13,6 +13,16 @@ view: users {
     }
   }
 
+#   dimension: safe_id {
+#     sql:
+#     CASE
+#       WHEN '{{ _user_attributes['can_see_id'] }}' = 'Yes'
+#       THEN ${id}::varchar
+#       ELSE MD5(${id})
+#     END
+#   ;;
+#   }
+
   dimension: age {
     type: number
     sql: ${TABLE}.age ;;
