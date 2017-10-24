@@ -71,6 +71,21 @@ view: orders {
     # drill_fields: [products.brand, product.category, order_items.count]
   }
 
+
+  dimension: status_new {
+    type: string
+    sql: ${TABLE}.status ;;
+    html:
+      {% if value == 'complete' %}
+        <div style="background-color:#D5EFEE">{{ value }}</div>
+      {% elsif value == 'pending' %}
+        <div style="background-color:#FCECCC">{{ value }}</div>
+      {% elsif value == 'cancelled' %}
+        <div style="background-color:#EFD5D6">{{ value }}</div>
+      {% endif %}
+      ;;
+    }
+
   measure: cancelled_items_distinct {
     type: count_distinct
     sql: ${TABLE}.id;;
