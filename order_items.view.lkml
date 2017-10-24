@@ -79,6 +79,18 @@ view: order_items {
     }
   }
 
+  filter: test {
+    type: string
+  }
+measure: html_test {
+  type: number
+  html: {% if _filters['test'] == 'a' %}
+  {{returned_sale_price._rendered_value}}
+  {% else %}
+  {{lost_revenue._rendered_value}}
+  {% endif %} ;;
+  sql: ${lost_revenue} ;; #can be anything you want
+}
 
 
   measure: returned_sale_price_distinct {
