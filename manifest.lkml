@@ -1,5 +1,5 @@
-project_name: "sami_project"
+# project_name: "sami_project"
 
-local_dependency: {
-  project: "test_datablocks"
-}
+# local_dependency: {
+#   project: "test_datablocks"
+# }

@@ -110,6 +110,12 @@ view: orders {
     sql: ${status} = 'complete' ;;
   }
 
+
+  dimension: is_weekend {
+    type: yesno
+    sql: ${created_day_of_week} = 'Saturday' OR ${created_day_of_week} = 'Sunday' ;;
+  }
+
   dimension: is_pending {
     type: yesno
     sql: ${status} = 'pending' ;;
@@ -160,6 +166,8 @@ view: orders {
     type: count
     drill_fields: [id, status, order_items.sale_price, products.brand, product.category, users.full_name, users.id]
   }
+
+
 
 
   # # TEMPLATED FILTER IN A DIMENSION

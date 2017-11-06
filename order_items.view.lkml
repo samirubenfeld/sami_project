@@ -233,6 +233,43 @@ measure: html_test {
 
 
 
+
+  parameter: sale_price_metric_picker {
+    description: "Use with the Sale Price Metric measure"
+    type: unquoted
+    allowed_value: {
+      label: "Total Sale Price"
+      value: "SUM"
+    }
+    allowed_value: {
+      label: "Average Sale Price"
+      value: "AVG"
+    }
+    allowed_value: {
+      label: "Maximum Sale Price"
+      value: "MAX"
+    }
+    allowed_value: {
+      label: "Minimum Sale Price"
+      value: "MIN"
+    }
+  }
+
+  measure: sale_price_metric {
+    description: "Use with the Sale Price Metric Picker filter-only field"
+    type: number
+    label_from_parameter: sale_price_metric_picker
+    sql: {% parameter sale_price_metric_picker %}(${sale_price}) ;;
+    value_format_name: usd
+  }
+
+
+
+
+
+
+
+
 #   measure: total_revenue {
 #     type: sum
 #     sql: ${sale_price} ;;
