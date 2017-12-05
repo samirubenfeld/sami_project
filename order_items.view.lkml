@@ -74,6 +74,9 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
+
+
+
   measure: returned_sale_price {
     type: sum
     sql: ${TABLE}.sale_price ;;
@@ -217,11 +220,40 @@ measure: html_test {
 #     }
 #   }
 
-  measure: percent_returned {
+  measure: percent_returned{
     type: number
     sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
     value_format: "#.00\%"
   }
+
+  measure: percent_returned_alt{
+    type: number
+#     sql: 100.0 * ${returned_items_distinct} / NULLIF(${count}, 0) ;;
+    sql: ${returned_items_distinct} / NULLIF(${count}, 0) ;;
+    value_format: "#.00\%"
+  }
+
+
+  measure: percent_returned_formatted {type: number sql: 1.0*(${percent_returned_alt});;
+    value_format: "0.00\%"
+    html: <div style="float: left
+          ; width:{{ value | times:100}}%
+          ; background-color: rgba(255,195,0,{{ value | times:100 }})
+          ; text-align:left
+          ; font-weight: bold
+          ; color: #000000
+          ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 4px;">{{ value | times:100 }}%</p>
+          </div>
+          <div style="float: left
+          ; width:{{ 1| minus:value | times:100}}%
+          ; background-color: rgba(255,195,0,0.1)
+          ; text-align:right
+          ; font-weight: bold
+          ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 0px; color:rgba(0,0,0,0.0" )>{{value}}</p>
+          </div>
+      ;;
+  }
+
 
    measure: returned_percent_gauge {
     type: number
@@ -306,6 +338,28 @@ measure: html_test {
     type: percent_of_total
     sql: ${total_gross_profit} ;;
   }
+
+  measure: count_percent {
+    type: percent_of_total
+    direction: "column"
+    value_format: "0.00\%"
+    sql:
+    ${count} ;;
+    description: "Has HTML"
+    html:
+      <div style="float: left
+        ; width:{{value | times: 7}}%
+        ; max-width: 75%
+        ; border-radius: 25px
+        ; font-weight: bold
+        ; color: #FFFFFF
+        ; background-color: rgba(79,195,247,{{value | times: 5 | divided_by: 100}})
+        ; text-align:left"> <p style="margin-bottom: 0; margin-left: 4px;">{{ rendered_value }}</p>
+      </div>
+     ;;
+  }
+
+
 
   measure: count_growth {
     type: percent_of_previous
