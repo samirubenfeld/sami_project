@@ -334,6 +334,7 @@ measure: html_test {
 #     value_format_name: usd
 #   }
 
+
   measure: percent_of_total_profit {
     type: percent_of_total
     sql: ${total_gross_profit} ;;
@@ -358,6 +359,10 @@ measure: html_test {
       </div>
      ;;
   }
+
+
+
+
 
 
 
