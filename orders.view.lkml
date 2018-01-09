@@ -51,6 +51,16 @@ view: orders {
   }
 
 
+  measure: count_last_28d {
+    type: count
+    hidden: yes
+    filters: {
+      field: created_date
+      value: "28 days"
+    }
+  }
+
+
   dimension: status_alt {
     type: string
     sql: ${TABLE}.status ;;
@@ -168,23 +178,86 @@ view: orders {
   }
 
 
+  dimension_group: today {
+    type: time
+    hidden: yes
+    timeframes: [day_of_month, month, month_num, date, raw]
+    sql: current_date ;;
+  }
+
+  ## Derive how many days are in each month to use in our calculation
+  dimension: days_in_month {
+    hidden: yes
+    type: number
+    sql:  CASE
+          WHEN ${today_month_num} IN (4,6,9,11) THEN 30
+          WHEN ${today_month_num} = 2 THEN 28
+          ELSE 31
+          END ;;
+  }
+
+  dimension: sale_price {
+    hidden: yes
+    type: number
+    sql: ${TABLE}.sale_price ;;
+  }
+
+  measure: total_sales {
+    type: sum
+    value_format_name: "usd_0"
+    sql: ${sale_price} ;;
+  }
+
+  filter: date_filter {
+    description: "Use this date filter in combination with the timeframes dimension for dynamic date filtering"
+    type: date
+  }
 
 
-  # # TEMPLATED FILTER IN A DIMENSION
+  dimension_group: filter_start_date {
+    type: time
+    timeframes: [raw]
+    sql: CASE WHEN {% date_start date_filter %} IS NULL THEN '1970-01-01' ELSE NULLIF({% date_start date_filter %}, 0)::timestamp END;;
+# MySQL: CASE WHEN {% date_start date_filter %} IS NULL THEN '1970-01-01' ELSE  TIMESTAMP(NULLIF({% date_start date_filter %}, 0)) END;;
+  }
 
-  # filter: timeframe {
-  #   suggestions: ["Daily", "Weekly", "Monthly", "Yearly"]
-  # }
+  dimension_group: filter_end_date {
+    type: time
+    timeframes: [raw]
+    sql: CASE WHEN {% date_end date_filter %} IS NULL THEN CURRENT_DATE ELSE NULLIF({% date_end date_filter %}, 0)::timestamp END;;
+# MySQL: CASE WHEN {% date_end date_filter %} IS NULL THEN NOW() ELSE TIMESTAMP(NULLIF({% date_end date_filter %}, 0)) END;;
+  }
 
-  # dimension: variable_timeframe {
-  #   sql: CASE
-  #       WHEN {% condition timeframe %} 'Daily' {% endcondition %} THEN TO_CHAR(${created_date},'YYYY-MM-DD')
-  #       WHEN {% condition timeframe %} 'Weekly' {% endcondition %} THEN ${created_week}
-  #       WHEN {% condition timeframe %} 'Monthly' {% endcondition %} THEN ${created_month}
-  #       WHEN {% condition timeframe %} 'Yearly' {% endcondition %} THEN TO_CHAR(${created_year}, '9999')
-  #     END
-  #     ;;
-  # }
+  dimension: interval {
+    type: number
+    sql: DATEDIFF(seconds, ${filter_start_date_raw}, ${filter_end_date_raw});;
+# MySQL: TIMESTAMPDIFF(second, ${filter_end_date_raw}, ${filter_start_date_raw});;
+  }
+
+  dimension: previous_start_date {
+    type: date
+    sql: DATEADD(seconds, -${interval}, ${filter_start_date_raw}) ;;
+# MySQL: DATE_ADD(${filter_start_date_raw}, interval ${interval} second) ;;
+  }
+
+  dimension: timeframes {
+    # description: "Use this field in combination with the date filter field for dynamic date filtering”
+  suggestions: ["period","previous period"]
+  type: string
+  case:  {
+    when:  {
+      sql: ${created_raw} BETWEEN ${filter_start_date_raw} AND  ${filter_end_date_raw};;
+      label: "Period"
+    }
+    when: {
+      sql: ${created_raw} BETWEEN ${previous_start_date} AND ${filter_start_date_raw} ;;
+      label: "Previous Period"
+    }
+    else: "Not in time period"
+  }
+}
+
+
 
 
 }

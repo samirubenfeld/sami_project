@@ -79,6 +79,20 @@ view: inventory_items {
     sql: ${TABLE}.sold_at IS NOT NULL ;;
   }
 
+  measure: number_on_hand {
+    type: count
+    filters: {
+      field: is_sold
+      value: "No"
+    }
+  }
+
+  # dimension: is_sold {
+  #   type: yesno
+  #   sql: ${sold_raw} is not null ;;
+  # }
+
+
   measure: sold_items_distinct {
     type: count_distinct
     sql: ${TABLE}.id;;
@@ -92,14 +106,6 @@ view: inventory_items {
     type: number
     sql: 100.0 * ${sold_items_distinct} / NULLIF(${count}, 0) ;;
     value_format: "0.00"
-  }
-
-  measure: number_on_hand {
-    type: count
-    filters: {
-      field: is_sold
-      value: "No"
-    }
   }
 
   measure: count_last_28d {
