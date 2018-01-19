@@ -485,6 +485,14 @@ measure: html_test {
   }
 
 
+  dimension: sale_price_tiered {
+    type: tier
+    tiers: [0, 100, 250, 500, 750, 1000]
+    style: classic # the default value, could be excluded
+    sql: ${sale_price} ;;
+  }
+
+
   #RANDOM
 
   dimension: random_value {

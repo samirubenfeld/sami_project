@@ -12,6 +12,25 @@ view: orders {
     suggestions: ["Date", "Week", "Month"]
   }
 
+  dimension: is_week_day {
+    type: yesno
+    sql: ${created_day_of_week_index} >=0 AND ${created_day_of_week_index}<= 4 ;;
+  }
+
+  dimension: created_formatted {
+    type: date
+    sql: ${TABLE}.created_at;;
+    label: "Date - formatted"
+    group_label: "Created Date"
+    html:
+
+       {% if is_week_day._value == "Yes" %}
+         <p style="color: white; background-color: #EC407A; font-size:100%; text-align:center">{{ rendered_value }}</p
+       {% else %}
+         <p> {{ value }} </p>
+       {% endif %} ;;
+  }
+
   dimension: dynamic_timeframe {
     type: string
     sql:
@@ -95,6 +114,9 @@ view: orders {
       {% endif %}
       ;;
     }
+
+
+
 
   measure: cancelled_items_distinct {
     type: count_distinct
