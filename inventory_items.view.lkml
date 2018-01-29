@@ -65,6 +65,7 @@ view: inventory_items {
     type: number
     sql: DATEDIFF(${sold_date}, ${created_date}) ;;
 
+
   }
 
   dimension: days_in_inventory_tiered {
@@ -72,6 +73,17 @@ view: inventory_items {
     style: relational
     tiers: [0,10,20,30,50,100]
     sql: ${days_in_inventory};;
+  }
+
+
+  measure: count_greater_100 {
+    type: count
+    hidden: no
+    filters: {
+      field: days_in_inventory_tiered
+      value: ">= 100.0"
+    }
+    drill_fields: [detail_100*]
   }
 
   dimension: is_sold {
@@ -123,6 +135,16 @@ view: inventory_items {
     value_format: "0.00"
   }
 
+
+
+  measure: percent_old_stock {
+    type: number
+    sql: 100.0 * ${count_greater_100} / NULLIF(${count}, 0) ;;
+    value_format:  "0.00\%"
+# html: <p style="color: black; background-color: rgba({{ value | times: -100.0 | round | plus: 250 }},{{value | times: 100.0 | round | plus: 100}},100,80); font-size:100%; text-align:center">{{ rendered_value }}</p> ;;
+  html: <b><p style="color: white; background-color: #67dba5; font-size:100%; text-align:center; margin: 0; border-radius: 5px;">{{ rendered_value }}</p></b> ;;
+  }
+
   measure: count_last_28d {
     type: count
     hidden: yes
@@ -143,7 +165,7 @@ view: inventory_items {
 
   measure: count {
     type: count
-    drill_fields: [id, products.brand, products.category, products.item_name, products.id, created_date, order_items.count]
+    drill_fields: [detail*]
   }
 
 
@@ -249,7 +271,11 @@ view: inventory_items {
   }
 
   set: detail {
-    fields: [id, products.item_name, products.category, products.brand, products.department, cost, created_time, sold_time]
+    fields: [id, products.id, orders_items.order_id, sold_date, created_date, days_in_inventory, products.item_name, products.category, products.brand, products.department, cost]
+  }
+
+  set: detail_100 {
+    fields: [products.id, products.item_name, products.category, products.brand, products.department, count]
   }
 
 #   measure: total_profit {
