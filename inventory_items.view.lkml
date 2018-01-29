@@ -79,8 +79,12 @@ view: inventory_items {
     sql: ${TABLE}.sold_at IS NOT NULL ;;
   }
 
+
+
   measure: number_on_hand {
     type: count
+    drill_fields: [detail*]
+
     filters: {
       field: is_sold
       value: "No"
@@ -101,6 +105,17 @@ view: inventory_items {
       value: "-NULL"
     }
   }
+
+  measure: sold_count {
+    type: count
+    drill_fields: [detail*]
+
+    filters: {
+      field: is_sold
+      value: "Yes"
+    }
+  }
+
 
   measure: percent_sold {
     type: number
@@ -130,6 +145,19 @@ view: inventory_items {
     type: count
     drill_fields: [id, products.brand, products.category, products.item_name, products.id, created_date, order_items.count]
   }
+
+
+
+
+  measure: stock_coverage_ratio {
+    type:  number
+    description: "Stock on Hand vs Trailing 28d Sales Ratio"
+    sql:  1.0 * ${number_on_hand} / nullif(${orders.count_last_28d},0) ;;
+    value_format_name: decimal_2
+    html: <p style="color: black; background-color: rgba({{ value | times: -100.0 | round | plus: 250 }},{{value | times: 100.0 | round | plus: 100}},100,80); font-size:100%; text-align:center">{{ rendered_value }}</p> ;;
+  }
+
+
 #
 #   filter: date_filter {
 #     description: "Use this date filter in combination with the timeframes dimension for dynamic date filtering"
@@ -218,6 +246,10 @@ view: inventory_items {
     type: average
     sql:  ${cost} ;;
     value_format_name:  usd
+  }
+
+  set: detail {
+    fields: [id, products.item_name, products.category, products.brand, products.department, cost, created_time, sold_time]
   }
 
 #   measure: total_profit {

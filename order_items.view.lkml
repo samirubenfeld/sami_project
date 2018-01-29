@@ -115,6 +115,8 @@ measure: html_test {
 }
 
 
+
+
   measure: returned_sale_price_distinct {
     type: sum_distinct
     sql: ${TABLE}.sale_price ;;

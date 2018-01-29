@@ -17,6 +17,18 @@ view: orders {
     sql: ${created_day_of_week_index} >=0 AND ${created_day_of_week_index}<= 4 ;;
   }
 
+  measure: count_last_28d {
+    label: "Count Sold in Trailing 28 Days"
+    type: count_distinct
+    sql: ${id} ;;
+    hidden: yes
+    filters:
+    {
+      field: created_date
+      value: "28 days"
+    }
+  }
+
   dimension: created_formatted {
     type: date
     sql: ${TABLE}.created_at;;
@@ -70,14 +82,14 @@ view: orders {
   }
 
 
-  measure: count_last_28d {
-    type: count
-    hidden: yes
-    filters: {
-      field: created_date
-      value: "28 days"
-    }
-  }
+#   measure: count_last_28d {
+#     type: count
+#     hidden: yes
+#     filters: {
+#       field: created_date
+#       value: "28 days"
+#     }
+#   }
 
 
   dimension: status_alt {
