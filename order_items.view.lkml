@@ -176,14 +176,7 @@ measure: html_test {
 
   measure: count {
     type: count
-    drill_fields: [
-      id,
-      returned_time,
-      sale_price,
-      products.name,
-      order_id,
-      inventory_item_id
-    ]
+    drill_fields: [detail*]
   }
 
   measure: returned_items_distinct {
@@ -501,4 +494,10 @@ measure: html_test {
     type:  number
     sql: ROUND(RAND()*100, 0) ;;
   }
+
+
+  set: detail {
+    fields: [id, order_id, orders.status, orders.created_date, sale_price, products.brand, products.item_name, users.name, users.email]
+  }
+
 }
