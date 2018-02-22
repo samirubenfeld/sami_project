@@ -13,6 +13,15 @@ view: users {
     }
   }
 
+  dimension: is_in_vendor_list {
+    type:yesno
+    sql: ${TABLE}.id IN (5060,5125,8149,5157,2433);;
+  }
+
+
+
+
+
 #   dimension: safe_id {
 #     sql:
 #     CASE
@@ -95,6 +104,8 @@ view: users {
       value: "Connecticut, Maine, Massachusetts, New Hampshire, Rhode Island, Vermont, New Jersey, New York, Pennsylvania"
     }
   }
+
+
 
   measure: Midwest_count {
     type: count
@@ -317,6 +328,11 @@ view: users {
       field: gender
       value: "Female"
     }
+  }
+
+  measure: running_total_users {
+    type: running_total
+    sql: ${id} ;;
   }
 
 

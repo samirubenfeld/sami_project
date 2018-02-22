@@ -196,6 +196,7 @@ measure: html_test {
       field: returned_date
       value: "-NULL"
     }
+    link: {label: "Explore Top 20 Results" url: "{{ link }}&limit=20" }
   }
 
 #   measure: returned_items_count {
