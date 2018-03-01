@@ -257,7 +257,7 @@ view: orders {
   }
 
 
-  measure: count_viz_line {
+  measure: count_distinct {
     type: count_distinct
     sql: ${id} ;;
     drill_fields: [orders.created_date, order_items.total_sale_price]
@@ -326,7 +326,7 @@ view: orders {
 
 
 
-  measure: count_distinct {
+  measure: count_distinct_users {
     type: count_distinct
     sql: ${user_id} ;;
   }
