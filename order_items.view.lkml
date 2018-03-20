@@ -242,7 +242,7 @@ measure: html_test {
           </div>
           <div style="float: left
           ; width:{{ 1| minus:value | times:100}}%
-          ; background-color: rgba(255,195,0,0.1)
+          ; background-color: rgba(251,214,205,0.1)
           ; text-align:right
           ; font-weight: bold
           ; border-radius: 5px"> <p style="margin-bottom: 0; margin-left: 0px; color:rgba(0,0,0,0.0" )>{{value}}</p>
