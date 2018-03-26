@@ -160,6 +160,17 @@ view: orders {
     sql: ${created_day_of_week} = 'Saturday' OR ${created_day_of_week} = 'Sunday' ;;
   }
 
+  dimension: weekend_named {
+    case: {
+      when: {
+        sql: ${created_day_of_week_index} = '5' OR ${created_day_of_week_index} = '6' ;;
+        label: "Is Weekend"
+      }
+      else: "Is Weekday"
+    }
+  }
+
+
   dimension: is_pending {
     type: yesno
     sql: ${status} = 'pending' ;;
