@@ -81,6 +81,12 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
+  measure: event_day_count {
+    type: count_distinct
+    sql: ${created_date} ;;
+  }
+
+
 
 #   measure: count_last_28d {
 #     type: count
