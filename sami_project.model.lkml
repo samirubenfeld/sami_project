@@ -24,6 +24,9 @@ map_layer: my_california_layer {
 }
 
 # explore: order_purchase_affinity {}
+explore: order_product {}
+
+
 
 explore: events {
   hidden: yes
