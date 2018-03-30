@@ -23,7 +23,7 @@ map_layer: my_california_layer {
   url: "https://www.dropbox.com/s/bdt59bats1ngyku/tl_2010_06_zcta510.json?dl=0"
 }
 
-
+# explore: order_purchase_affinity {}
 
 explore: events {
   hidden: yes
