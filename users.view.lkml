@@ -259,13 +259,14 @@ view: users {
   }
 
 
-
   dimension: state {
     type: string
     map_layer_name: us_states
     drill_fields: [detail*]
     sql: ${TABLE}.state ;;
   }
+
+
 
   filter: full_name_select {
     suggest_dimension: full_name

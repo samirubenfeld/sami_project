@@ -23,8 +23,22 @@ map_layer: my_california_layer {
   url: "https://www.dropbox.com/s/bdt59bats1ngyku/tl_2010_06_zcta510.json?dl=0"
 }
 
-# explore: order_purchase_affinity {}
-explore: order_product {}
+explore: order_purchase_affinity {
+  label: "Affinity"
+  view_label: "Affinity"
+
+  always_filter: {
+    filters: {
+      field: affinity_timeframe
+      value: "last 90 days"
+    }
+  }
+
+  join: total_orders {
+    type: cross
+    relationship: many_to_one
+  }
+}
 
 
 
