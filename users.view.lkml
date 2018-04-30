@@ -286,6 +286,26 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
+  filter: zipcode_count_picker {
+    description: "Use with the Zipcode Count measure"
+    type: string
+    suggest_explore: order_items
+    suggest_dimension: users.zip
+  }
+
+  measure: zipcode_count {
+    description: "Use with the Zipcode Count Picker filter-only field"
+    type: sum
+    sql:
+    CASE
+      WHEN {% condition zipcode_count_picker %} ${users.zip} {% endcondition %}
+      THEN 1
+      ELSE 0
+    END
+  ;;
+  }
+
+
 
   measure: count {
     type: count
