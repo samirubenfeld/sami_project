@@ -264,6 +264,11 @@ view: users {
     map_layer_name: us_states
     drill_fields: [detail*]
     sql: ${TABLE}.state ;;
+    link: {
+      label: "Regional Drilldown"
+      url: "/dashboards/36?Region={{ value }}"
+      icon_url: "http://looker.com/favicon.ico"
+    }
   }
 
 

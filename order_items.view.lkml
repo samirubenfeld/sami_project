@@ -19,6 +19,19 @@ view: order_items {
     sql: ${TABLE}.inventory_item_id ;;
   }
 
+  measure: average_spend_per_user {
+    type: number
+    value_format_name: usd
+    sql: 1.0 * ${total_revenue} / NULLIF(${users.count},0) ;;
+  }
+
+  measure: total_revenue {
+    type: sum
+    value_format_name: usd
+    sql: ${sale_price} ;;
+    drill_fields: [detail*]
+  }
+
 
   filter: category_count_picker {
     description: "Use with the Category Count measure"
@@ -74,6 +87,11 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
+  measure: order_count {
+    description: "A count of unique orders"
+    type: count_distinct
+    sql: ${order_id} ;;
+  }
 
 
 
@@ -484,7 +502,7 @@ measure: html_test {
   dimension: sale_price_tiered {
     type: tier
     tiers: [0, 100, 250, 500, 750, 1000]
-    style: classic # the default value, could be excluded
+    style: integer # the default value, could be excluded
     sql: ${sale_price} ;;
   }
 
