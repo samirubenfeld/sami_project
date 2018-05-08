@@ -289,6 +289,11 @@ view: users {
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+    link: {
+      label: "Zipcode Drilldown"
+      url: "/dashboards/37?Zipcode={{ value }}"
+      icon_url: "http://looker.com/favicon.ico"
+    }
   }
 
   filter: zipcode_count_picker {

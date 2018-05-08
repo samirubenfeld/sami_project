@@ -197,6 +197,11 @@ measure: html_test {
     drill_fields: [detail*]
   }
 
+  measure: order_item_count {
+    type: count
+    drill_fields: [detail*]
+  }
+
   measure: returned_items_distinct {
     type: count_distinct
     sql: ${TABLE}.id;;
