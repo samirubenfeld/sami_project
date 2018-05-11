@@ -12,6 +12,23 @@ view: orders {
     suggestions: ["Date", "Week", "Month"]
   }
 
+  #EXTRACT(MONTH FROM date_column)
+
+  dimension: reporting_period {
+    group_label: "Order Date"
+    sql: CASE
+        WHEN EXTRACT(YEAR FROM ${created_raw}) = EXTRACT(YEAR FROM current_date)
+        AND ${created_raw} < CURRENT_DATE
+        THEN 'This Year to Date'
+
+        WHEN EXTRACT(YEAR FROM ${created_raw}) + 1 = EXTRACT(YEAR FROM current_date)
+        AND DAYOFYEAR(${created_raw}) <= DAYOFYEAR(current_date)
+        THEN 'Last Year to Date'
+
+      END
+       ;;
+  }
+
   dimension: is_week_day {
     type: yesno
     sql: ${created_day_of_week_index} >=0 AND ${created_day_of_week_index}<= 4 ;;
@@ -79,6 +96,15 @@ view: orders {
       year
     ]
     sql: ${TABLE}.created_at ;;
+    drill_fields: [count_viz, id,
+      users.full_name,
+      order_items.returned_date,
+      order_items.sale_price,
+      products.name,
+      products.item_name,
+      order_items.order_id,
+      order_items.inventory_item_id
+    ]
   }
 
   measure: event_day_count {

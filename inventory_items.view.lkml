@@ -26,7 +26,10 @@ view: inventory_items {
       week,
       month,
       quarter,
-      year
+      year,
+      hour_of_day,
+      month_num,
+      week_of_year
     ]
     sql: ${TABLE}.created_at ;;
   }
