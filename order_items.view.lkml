@@ -197,6 +197,27 @@ measure: html_test {
     drill_fields: [detail*]
   }
 
+  measure: count_percent_viz {
+    type: percent_of_total
+    direction: "column"
+    value_format: "0.00\%"
+    sql:
+    ${count} ;;
+    description: "Has HTML"
+    html:
+      <div style="float: left
+        ; width:{{value | times: 7}}%
+        ; max-width: 75%
+        ; border-radius: 25px
+        ; font-weight: bold
+        ; font-color: white
+        ; background-color: rgba(242,56,90,{{value | times: 5 | divided_by: 100}})
+        ; text-align:left"> <p style="margin-bottom: 0; margin-left: 4px;">{{ rendered_value }}</p>
+      </div>
+     ;;
+  }
+
+
   measure: order_item_count {
     type: count
     drill_fields: [detail*]
@@ -405,16 +426,79 @@ measure: html_test {
       field: returned_date
       value: "NULL"
     }
+
   }
 
   measure: total_gross_profit {
     type: sum
     sql: ${gross_profit} ;;
     value_format: "$#,##0.00"
-    drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
+#     drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
     filters: {
       field: returned_date
       value: "NULL"
+    }
+    drill_fields: [orders.created_date, order_items.total_sale_price]
+    link: {
+      label: "Show as line plot"
+      url: "
+      {% assign vis_config = '{
+      \"stacking\"                  : \"\",
+      \"show_value_labels\"         : false,
+      \"label_density\"             : 25,
+      \"legend_position\"           : \"center\",
+      \"x_axis_gridlines\"          : true,
+      \"y_axis_gridlines\"          : true,
+      \"show_view_names\"           : false,
+      \"limit_displayed_rows\"      : false,
+      \"y_axis_combined\"           : true,
+      \"show_y_axis_labels\"        : true,
+      \"show_y_axis_ticks\"         : true,
+      \"y_axis_tick_density\"       : \"default\",
+      \"y_axis_tick_density_custom\": 5,
+      \"show_x_axis_label\"         : false,
+      \"show_x_axis_ticks\"         : true,
+      \"x_axis_scale\"              : \"auto\",
+      \"y_axis_scale_mode\"         : \"linear\",
+      \"show_null_points\"          : true,
+      \"point_style\"               : \"none\",
+      \"ordering\"                  : \"none\",
+      \"show_null_labels\"          : false,
+      \"show_totals_labels\"        : false,
+      \"show_silhouette\"           : false,
+      \"totals_color\"              : \"#808080\",
+      \"type\"                      : \"looker_area\",
+      \"interpolation\"             : \"linear\",
+      \"series_types\"              : {},
+      \"colors\": [
+      \"palette: Default\"
+      ],
+      \"series_colors\"             : {},
+      \"x_axis_datetime_tick_count\": null,
+      \"trend_lines\": [
+      {
+      \"color\"             : \"#38A6A5\",
+      \"label_position\"    : \"left\",
+      \"period\"            : 30,
+      \"regression_type\"   : \"average\",
+      \"series_index\"      : 1,
+      \"show_label\"        : true,
+      \"label_type\"        : \"string\",
+      \"label\"             : \"30 day moving average\"
+      },
+      {
+      \"color\"             : \"#EDAD08\",
+      \"label_position\"    : \"right\",
+      \"period\"            : 7,
+      \"regression_type\"   : \"average\",
+      \"series_index\"      : 1,
+      \"show_label\"        : true,
+      \"label_type\"        : \"string\",
+      \"label\"             : \"7 day moving average\"
+      }
+      ]
+      }' %}
+      {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
     }
   }
 
@@ -422,10 +506,72 @@ measure: html_test {
     type: sum
     sql: ${sale_price} ;;
     value_format: "$#,##0.00"
-    drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
+    #drill_fields: [users.id, users.state, products.id, products.item_name, order_items.sale_price, returned_date, users.full_name, users.email]
     filters: {
       field: returned_date
       value: "NULL"
+    }
+    drill_fields: [orders.created_date, order_items.total_sale_price]
+    link: {
+      label: "Show as line plot"
+      url: "
+      {% assign vis_config = '{
+      \"stacking\"                  : \"\",
+      \"show_value_labels\"         : false,
+      \"label_density\"             : 25,
+      \"legend_position\"           : \"center\",
+      \"x_axis_gridlines\"          : true,
+      \"y_axis_gridlines\"          : true,
+      \"show_view_names\"           : false,
+      \"limit_displayed_rows\"      : false,
+      \"y_axis_combined\"           : true,
+      \"show_y_axis_labels\"        : true,
+      \"show_y_axis_ticks\"         : true,
+      \"y_axis_tick_density\"       : \"default\",
+      \"y_axis_tick_density_custom\": 5,
+      \"show_x_axis_label\"         : false,
+      \"show_x_axis_ticks\"         : true,
+      \"x_axis_scale\"              : \"auto\",
+      \"y_axis_scale_mode\"         : \"linear\",
+      \"show_null_points\"          : true,
+      \"point_style\"               : \"none\",
+      \"ordering\"                  : \"none\",
+      \"show_null_labels\"          : false,
+      \"show_totals_labels\"        : false,
+      \"show_silhouette\"           : false,
+      \"totals_color\"              : \"#808080\",
+      \"type\"                      : \"looker_area\",
+      \"interpolation\"             : \"linear\",
+      \"series_types\"              : {},
+      \"colors\": [
+      \"palette: Default\"
+      ],
+      \"series_colors\"             : {},
+      \"x_axis_datetime_tick_count\": null,
+      \"trend_lines\": [
+      {
+      \"color\"             : \"#38A6A5\",
+      \"label_position\"    : \"left\",
+      \"period\"            : 30,
+      \"regression_type\"   : \"average\",
+      \"series_index\"      : 1,
+      \"show_label\"        : true,
+      \"label_type\"        : \"string\",
+      \"label\"             : \"30 day moving average\"
+      },
+      {
+      \"color\"             : \"#EDAD08\",
+      \"label_position\"    : \"right\",
+      \"period\"            : 7,
+      \"regression_type\"   : \"average\",
+      \"series_index\"      : 1,
+      \"show_label\"        : true,
+      \"label_type\"        : \"string\",
+      \"label\"             : \"7 day moving average\"
+      }
+      ]
+      }' %}
+      {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
     }
   }
 

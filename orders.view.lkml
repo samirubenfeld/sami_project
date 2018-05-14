@@ -380,7 +380,8 @@ view: orders {
   measure: count {
     label: "Count of Orders"
     type: count
-    drill_fields: [id, status, order_items.sale_price, products.brand, products.category, users.full_name, users.id]
+    drill_fields: [count_viz, id, status, order_items.sale_price, products.brand, products.category, users.full_name, users.id]
+
   }
 
 
