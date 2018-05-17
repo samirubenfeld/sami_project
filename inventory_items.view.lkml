@@ -73,7 +73,7 @@ view: inventory_items {
 
   dimension: days_in_inventory_tiered {
     type: tier
-    style: relational
+    style: integer
     tiers: [0,10,20,30,50,100]
     sql: ${days_in_inventory};;
   }
