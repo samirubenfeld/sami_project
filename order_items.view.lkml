@@ -658,6 +658,15 @@ measure: html_test {
   }
 
 
+  measure: returned_orders_distinct {
+    type: count_distinct
+    sql: ${TABLE}.order_id;;
+    filters: {
+      field: order_items.returned_date
+      value: "-NULL"
+    }
+  }
+
   #RANDOM
 
   dimension: random_value {

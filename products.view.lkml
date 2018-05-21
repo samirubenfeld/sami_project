@@ -95,6 +95,7 @@ view: products {
     sql: GROUP_CONCAT(${brand}) ;;
   }
 
+
   measure: count {
     type: count
     drill_fields: [
