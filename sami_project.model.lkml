@@ -3,11 +3,11 @@ connection: "the_look"
 
 # include all the views
 include: "*.view"
-include: "bq.*.view"
+# include: "bq.*.view"
 # include: "bq.explore.lkml"
 
 # include all the dashboards
-include: "*.dashboard"
+# include: "*.dashboard"
 # include: "/test_datablocks/bq.*.view.lkml"
 # include: "/test_datablocks/bq.explore.lkml"
 
