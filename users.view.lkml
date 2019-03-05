@@ -24,6 +24,24 @@ view: users {
   }
 
 
+  dimension: states {
+    type: string
+    sql: ${TABLE}.state ;;
+    html:
+    {% assign states = value | split: "|" %}
+
+    <details>
+    <summary>States ({{states.size}})</summary>
+
+    <ul>
+      {% for state in states %}
+     <li>{{state}}</li>
+      {% endfor %}
+    </ul>
+    </details>
+    ;;
+  }
+
 
 
 
