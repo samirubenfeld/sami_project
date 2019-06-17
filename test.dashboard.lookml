@@ -1,5 +1,5 @@
 - dashboard: test
-  title: TEST
+  title: LOOKML DASH
   layout: newspaper
   elements:
   - title: New Tile
