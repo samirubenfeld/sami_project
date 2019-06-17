@@ -3,6 +3,7 @@ connection: "the_look"
 
 # include all the views
 include: "*.view"
+include: "*.dashboard"
 # include: "bq.*.view"
 # include: "bq.explore.lkml"
 
